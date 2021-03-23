@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'futuralightbt';
+    src: local('futuralightbt'), url(../fonts/futuralightbt.ttf) format('truetype')
+}
+
+.nav-item {
+    font-family: 'futuralightbt';
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.search-bar{
+
+}
+
+.colour-nav{
+    background-color: #800f69;
+}
+
+.colour-nav .navbar-nav .nav-link{
+    color: white;
+}
