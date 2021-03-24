@@ -5,15 +5,14 @@
 
 .nav-item {
     font-family: 'futuralightbt';
-    color: white;
 }
 
 .nav-link {
     color: white;
 }
 
-.search-bar{
-
+.navbar-brand {
+    margin-left: 10px;
 }
 
 .colour-nav{
@@ -22,4 +21,8 @@
 
 .colour-nav .navbar-nav .nav-link{
     color: white;
+}
+
+.nfsa-navbar {
+    
 }
