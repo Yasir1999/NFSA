@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Component } from 'react';
+import Navigation from './components/Navigation';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Home } from './components/Home';
+import { About } from './components/About';
+import { Charges } from './components/Charges';
+import { AccessRestrictions } from './components/AccessRestrictions';
+import { Help } from './components/Help';
+import { NoMatch } from './components/NoMatch';
+import { Login } from './components/Login';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  render () {
+    return (
+      <>
+        <Navigation />
+        <React.Fragment>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/help" component={Help} />
+              <Route path="/accessrestrictions" component={AccessRestrictions} />
+              <Route path="/login" component={Login} />
+              <Route path="/charges" component={Charges} />
+              <Route component={NoMatch} />
+            </Switch>
+          </Router>
+        </React.Fragment>
+        </>
+      );
+}
 }
 
 export default App;
