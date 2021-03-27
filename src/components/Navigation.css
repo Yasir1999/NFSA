@@ -3,8 +3,9 @@
     src: local('futuralightbt'), url(../fonts/futuralightbt.ttf) format('truetype')
 }
 
-.nav-item {
+.nav-item .nav-link {
     font-family: 'futuralightbt';
+    font-size: 20px;
 }
 
 .nav-link {
@@ -12,7 +13,8 @@
 }
 
 .navbar-brand {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
+    margin-top: -30px;
 }
 
 .colour-nav{
@@ -23,6 +25,30 @@
     color: white;
 }
 
-.nfsa-navbar {
-    
+.nfsa-search {
+    width:200px;
+    font-family: 'futuralightbt';
+}
+
+.form-group{
+    width:400px;
+}
+
+.search-icon .form-control {
+    padding-right: 2.375rem;
+}
+
+.search-icon {
+    position:relative;
+}
+
+.search-icon .form-control-feedback {
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    color: rgb(102, 102, 102);
+    position: absolute;
+    top: 10;
+    right: 0;
 }

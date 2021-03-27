@@ -1,8 +1,8 @@
 import React from 'react'
-
+import './Home.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import SearchReturn from './SearchReturn'
 
 export const Home = () => (
-    <div>
-        <h1>Welcome to the NFSA Collection</h1>
-    </div>
-)
+        <SearchReturn/>
+    )

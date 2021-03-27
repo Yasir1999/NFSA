@@ -10,8 +10,10 @@ const options = [
 
 function Search({style}){
     return <div style={style}>
-        <Select options={options} />
+        <Select options={options} isMulti />
     </div>
 }
+
+
 
 export default Search;
