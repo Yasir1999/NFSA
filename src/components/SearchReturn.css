@@ -1,0 +1,22 @@
+.search-button{
+    background-color: #800f69;
+    outline: #800f69;
+    width: 50%;
+    text-align: center;
+    max-width: 250px;
+}
+
+.btn-link {
+    color: white;
+}
+
+.btn-link:hover{
+    color:rgb(165, 165, 165);
+    text-decoration: none;
+}
+
+.container {
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+}

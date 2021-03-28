@@ -10,7 +10,7 @@ const options = [
 
 function Search({style}){
     return <div style={style}>
-        <Select options={options} isMulti />
+        <Select options={options} isMulti placeholder="Categories"/>
     </div>
 }
 

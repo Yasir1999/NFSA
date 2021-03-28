@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, Col, Row, Container, InputGroup, FormControl} from 'react-bootstrap';
+import {Navbar, Nav, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navigation.css';
 import Search from './Search';
@@ -9,12 +9,12 @@ function Navigation() {
     return (
         <>
         {/* Setting the links to pages via Nav.Link items */}
-        <Navbar className="colour-nav" expand="sm">
+        <Navbar className="colour-nav" expand="lg">
             <Navbar.Brand href="/"><img alt="" src="../../logo192.png" className="navbar-brand"/></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav navbar-brand"/>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggle navbar-dark"/>
             {/* Added collapsable Navbar when window size gets smaller */}
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand">
-                <Nav>
+                <Nav className="adjust-height">
                     <Nav.Item>
                     <Nav.Link href="/about">About</Nav.Link>
                     </Nav.Item>
@@ -33,17 +33,20 @@ function Navigation() {
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
+
         <div class="input-group justify-content-center nav-fill nav colour-nav">
-            <div className="nfsa-search row">
-                <div className="nfsa-search col-xs-6">
+            <Container className="container-height">
+            <div className="searchbar-align">
+                <div className="nfsa-search">
                     <Search />
                 </div>
 
-                <div className="form-group search-icon col-xs-6">
+                <div className="form-group search-icon">
                     <span className="fa fa-search form-control-feedback"></span>
                     <input type="text" className="form-control" placeholder="Search"/> 
                 </div>
             </div>
+            </Container>
         </div>
      {/*
         <Navbar className="justify-content-center nav-fill nav colour-nav">

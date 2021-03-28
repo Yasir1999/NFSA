@@ -3,9 +3,20 @@
     src: local('futuralightbt'), url(../fonts/futuralightbt.ttf) format('truetype')
 }
 
+
 .nav-item .nav-link {
     font-family: 'futuralightbt';
     font-size: 20px;
+    margin: 60px;
+}
+
+.adjust-height .nav-item .nav-link{
+    height: 1px;
+}
+
+.navbar-toggle {
+    margin-top: -40px;
+    border-color: white;
 }
 
 .nav-link {
@@ -13,8 +24,10 @@
 }
 
 .navbar-brand {
-    /*margin-left: 10px;*/
+    max-width: 1300px;
     margin-top: -30px;
+    margin-bottom: auto;
+    margin-block-end: auto;
 }
 
 .colour-nav{
@@ -26,12 +39,15 @@
 }
 
 .nfsa-search {
-    width:200px;
+    width:500px;
     font-family: 'futuralightbt';
+    max-width: 1200px;
 }
 
 .form-group{
-    width:400px;
+    width:1000px;
+    font-family: 'futuralightbt';
+    max-width: 1200px;
 }
 
 .search-icon .form-control {
@@ -51,4 +67,14 @@
     position: absolute;
     top: 10;
     right: 0;
+}
+
+.searchbar-align {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-height {
+    margin-bottom: 20px;
 }
