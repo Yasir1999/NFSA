@@ -1,9 +1,23 @@
 .headingtext {
     text-align:center;
-    font-family: 'futuralightbt';
+    font-family: 'panton';
+    font-size: 68px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
+
 .wrapper {
-    width: 1400px;
+    max-width: 1400px;
     margin:  auto;
+}
+
+.bodytext {
+    font-family: Verdana;
+}
+
+.disclaimertext {
+    font-family: serif;
+    font-size: medium;
+    text-align:justify;
 }

@@ -9,11 +9,11 @@ function Navigation() {
     return (
         <>
         {/* Setting the links to pages via Nav.Link items */}
-        <Navbar className="colour-nav" expand="lg">
+        <Navbar className="colour-nav" expand="xl">
             <Navbar.Brand href="/"><img alt="" src="../../logo192.png" className="navbar-brand"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggle navbar-dark"/>
             {/* Added collapsable Navbar when window size gets smaller */}
-            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand">
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand ">
                 <Nav className="adjust-height">
                     <Nav.Item>
                     <Nav.Link href="/about">About</Nav.Link>

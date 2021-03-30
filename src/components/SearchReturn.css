@@ -1,9 +1,9 @@
 .search-button{
     background-color: #800f69;
     outline: #800f69;
-    width: 50%;
-    text-align: center;
+    width: 100%;
     max-width: 250px;
+    margin: 5px;
 }
 
 .btn-link {
@@ -19,4 +19,9 @@
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.cardsizing {
+    max-width: 1600px;
+    margin: auto;
 }
