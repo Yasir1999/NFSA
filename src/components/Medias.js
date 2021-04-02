@@ -1,1 +1,0 @@
-{/* https://rangle.github.io/react-training/react-cardlist/ */}
