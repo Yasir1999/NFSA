@@ -24,7 +24,7 @@ export const AccessRestrictions = () => (
         <br></br>
         <br></br>
         
-        <div>
+        <div className="bodytext">
             <a name="copyright"><span>Copyright</span></a>
             <h4>Copyright</h4>
             <br></br>
@@ -41,7 +41,7 @@ export const AccessRestrictions = () => (
         <br></br>
         <br></br>
         <br></br>
-        <div>
+        <div className="bodytext">
             <a name="restrictions" data-hs-anchor="true"></a>
             <h4>Contractual or cultural restrictions</h4>
             <br></br>
@@ -52,7 +52,7 @@ export const AccessRestrictions = () => (
         <br></br>
         <br></br>
         <br></br>
-        <div>
+        <div className="bodytext">
             <a name="moralrights" data-hs-anchor="true"></a>
             <h4>Indigenous moral rights</h4>
             <br></br>
@@ -61,7 +61,7 @@ export const AccessRestrictions = () => (
             </p>
         </div>
         <br></br>
-        <div className="justify-content-center">
+        <div className="bodytext">
             <b>See <a href="http://nfsa.gov.au/collection/collection-enquiries/">Accessing the Collection</a> for more information about the NFSA's access services.</b>
         </div>
         <br></br>

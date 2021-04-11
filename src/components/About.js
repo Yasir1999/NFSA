@@ -26,7 +26,7 @@ export const About = () => (
             <br></br>
             <br></br>
             
-            <div>
+            <div className="bodytext">
                 <a name="aboutcatalogue"><span>About the Catalogue</span></a>
                 <h4>About the Catalogue</h4>
                 <br></br>
@@ -46,7 +46,7 @@ export const About = () => (
             <br></br>
             <br></br>
             <br></br>
-            <div>
+            <div className="bodytext">
                 <a name="datastandards" data-hs-anchor="true"></a>
                 <h4>Data Standards</h4>
                 <br></br>
@@ -74,7 +74,7 @@ export const About = () => (
             <br></br>
             <br></br>
             <br></br>
-            <div>
+            <div className="bodytext">
                 <a name="types" data-hs-anchor="true"></a>
                 <h4>Types of Holdings</h4>
                 <br></br>
@@ -105,7 +105,7 @@ export const About = () => (
             <br></br>
             <br></br>
             <br></br>
-            <div>
+            <div className="bodytext">
                 <a name="registeredmaterial" data-hs-anchor="true"></a>
                 <h4>Registered Material</h4>
                 <br></br>
