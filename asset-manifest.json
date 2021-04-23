@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/my-app/static/css/main.1a03fa23.chunk.css",
-    "main.js": "/my-app/static/js/main.6c472369.chunk.js",
-    "main.js.map": "/my-app/static/js/main.6c472369.chunk.js.map",
-    "runtime-main.js": "/my-app/static/js/runtime-main.0fbd472e.js",
-    "runtime-main.js.map": "/my-app/static/js/runtime-main.0fbd472e.js.map",
-    "static/css/2.4455615f.chunk.css": "/my-app/static/css/2.4455615f.chunk.css",
-    "static/js/2.aa6864d3.chunk.js": "/my-app/static/js/2.aa6864d3.chunk.js",
-    "static/js/2.aa6864d3.chunk.js.map": "/my-app/static/js/2.aa6864d3.chunk.js.map",
-    "index.html": "/my-app/index.html",
-    "static/css/2.4455615f.chunk.css.map": "/my-app/static/css/2.4455615f.chunk.css.map",
-    "static/css/main.1a03fa23.chunk.css.map": "/my-app/static/css/main.1a03fa23.chunk.css.map",
-    "static/js/2.aa6864d3.chunk.js.LICENSE.txt": "/my-app/static/js/2.aa6864d3.chunk.js.LICENSE.txt",
-    "static/media/font-awesome.min.css": "/my-app/static/media/fontawesome-webfont.f691f37e.woff",
-    "static/media/Navigation.css": "/my-app/static/media/futuralightbt.ead7282f.ttf"
+    "main.css": "./static/css/main.e33d0b2f.chunk.css",
+    "main.js": "./static/js/main.ff763670.chunk.js",
+    "main.js.map": "./static/js/main.ff763670.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.aa6d49db.js",
+    "runtime-main.js.map": "./static/js/runtime-main.aa6d49db.js.map",
+    "static/css/2.66b8b0dd.chunk.css": "./static/css/2.66b8b0dd.chunk.css",
+    "static/js/2.bcedced3.chunk.js": "./static/js/2.bcedced3.chunk.js",
+    "static/js/2.bcedced3.chunk.js.map": "./static/js/2.bcedced3.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/2.66b8b0dd.chunk.css.map": "./static/css/2.66b8b0dd.chunk.css.map",
+    "static/css/main.e33d0b2f.chunk.css.map": "./static/css/main.e33d0b2f.chunk.css.map",
+    "static/js/2.bcedced3.chunk.js.LICENSE.txt": "./static/js/2.bcedced3.chunk.js.LICENSE.txt",
+    "static/media/Navigation.css": "./static/media/futuralightbt.ead7282f.ttf",
+    "static/media/font-awesome.min.css": "./static/media/fontawesome-webfont.f691f37e.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.0fbd472e.js",
-    "static/css/2.4455615f.chunk.css",
-    "static/js/2.aa6864d3.chunk.js",
-    "static/css/main.1a03fa23.chunk.css",
-    "static/js/main.6c472369.chunk.js"
+    "static/js/runtime-main.aa6d49db.js",
+    "static/css/2.66b8b0dd.chunk.css",
+    "static/js/2.bcedced3.chunk.js",
+    "static/css/main.e33d0b2f.chunk.css",
+    "static/js/main.ff763670.chunk.js"
   ]
 }
