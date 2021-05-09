@@ -49,7 +49,7 @@ class ItemManager extends Component {
       console.log(evt);
       let itemObj = await self.ItemManagerContract.methods.items(evt.returnValues._itemIndex).call();
       //let itemObj3 = await self.ItemManagerContract.methods.items(evt.returnValues._itemAddress).call();
-      let itemObj2 = await self.ItemManagerContract.methods.items(evt.returnValues._step).call();
+      //let itemObj2 = await self.ItemManagerContract.methods.items(evt.returnValues._step).call();
       console.log(itemObj._step);
       console.log(self.ItemManagerContract.methods.items(evt.returnValues._step).call());
       if(itemObj._state === "2"){
@@ -86,6 +86,16 @@ class ItemManager extends Component {
       document.getElementById('outputAddress').innerText = awaitAddress;
     } 
   };
+
+  handleDelivery = async() => {
+    let self = this;
+    this.ItemManagerContract.events.SupplyChainStep().on("data", async function(evt) {
+      console.log(evt);
+      let itemDeliver = await self.ItemManagerContract.methods.triggerDelivery(evt.returnValues._itemIndex).call();
+      console.log("item delivered: " + itemDeliver);
+      document.getElementById('deliverItem').innerText = itemDeliver;
+    }
+  )};
 
 
     render() {
@@ -133,6 +143,8 @@ class ItemManager extends Component {
               </div>
               <div className="row justify-content-center wrapper">
                   <Button variant="dark" type="button" onClick={this.handleSubmit}>Create new Item</Button>
+                  <Button variant="dark" type="button" onClick={this.handleDelivery}>Deliver Item</Button>
+                  <span id="deliverItem"/>
               </div>
           </div>
         </Container>

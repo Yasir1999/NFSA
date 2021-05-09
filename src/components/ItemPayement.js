@@ -78,7 +78,7 @@ class ItemPayment extends Component {
     handleSubmit = async() => {
         const Web3 = require("web3");
         const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:" + 7545));
-        //const web3_utils = require('web3-utils');
+        const web3_utils = require('web3-utils');
         const accounts = await web3.eth.getAccounts();
         const { cost, toAddress } = this.state;
         console.log(toAddress, cost, this.ItemManagerContract);
@@ -87,7 +87,9 @@ class ItemPayment extends Component {
         //let payNow = await this.web3.eth.sendTransaction({from: account, to: toAddress, value: cost});0x740a9222503F6382694FD8E0f5e2916fCb394F5F
         /*console.log(weiValue);
         console.log(payNow);*/    
-        web3.eth.sendTransaction({from: accounts[0],to: toAddress, value: cost})
+        //web3.eth.sendTransaction({from: accounts[0],to: toAddress, value: web3_utils.hexToNumberString(web3_utils.asciiToHex(web3_utils.fromWei(cost, 'ether')))})
+        
+        web3.eth.sendTransaction({from: accounts[0],to: toAddress, value: web3_utils.numberToHex(cost)})
     };
 
 
