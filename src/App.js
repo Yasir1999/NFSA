@@ -10,6 +10,8 @@ import { AccessRestrictions } from './components/AccessRestrictions';
 import { Help } from './components/Help';
 import { NoMatch } from './components/NoMatch';
 import { Login } from './components/Login';
+import ItemManager from './components/ItemManager';
+
 
 
 class App extends Component {
@@ -26,6 +28,7 @@ class App extends Component {
               <Route path="/accessrestrictions" component={AccessRestrictions} />
               <Route path="/login" component={Login} />
               <Route path="/charges" component={Charges} />
+              <Route path="/contracts" component={ItemManager} />
               <Route component={NoMatch} />
             </Switch>
           </Router>
