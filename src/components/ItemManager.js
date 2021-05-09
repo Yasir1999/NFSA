@@ -119,7 +119,7 @@ class ItemManager extends Component {
                     <p>Cost in Wei:</p>
                   </row>
                   <row>
-                    <p>Item Identifier:</p>
+                    <p>Item Name:</p>
                   </row>
                 </div>
                 <div className="col-2">

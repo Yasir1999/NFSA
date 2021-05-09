@@ -11,6 +11,7 @@ import { Help } from './components/Help';
 import { NoMatch } from './components/NoMatch';
 import { Login } from './components/Login';
 import ItemManager from './components/ItemManager';
+import ItemPayment from './components/ItemPayement';
 
 
 
@@ -29,6 +30,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/charges" component={Charges} />
               <Route path="/contracts" component={ItemManager} />
+              <Route path="/payment" component={ItemPayment} />
               <Route component={NoMatch} />
             </Switch>
           </Router>
