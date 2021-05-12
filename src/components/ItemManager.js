@@ -144,7 +144,7 @@ class ItemManager extends Component {
               <div className="row justify-content-center wrapper">
                   <Button variant="dark" type="button" onClick={this.handleSubmit}>Create new Item</Button>
                   <Button variant="dark" type="button" onClick={this.handleDelivery}>Deliver Item</Button>
-                  <span id="deliverItem"/>
+                  {/*<span id="deliverItem"/>*/}
               </div>
           </div>
         </Container>
