@@ -33,12 +33,12 @@ contract ItemManager is Ownable {
         require(items[_itemIndex]._itemPrice == msg.value, "Only full payments accepted");
         require(items[_itemIndex]._state == SupplyChainState.Created, "Item is further in the chain");
         items[_itemIndex]._state = SupplyChainState.Paid;
-        emit SupplyChainStep(itemIndex, uint(items[_itemIndex]._state), address(items[_itemIndex]._item));
+        emit SupplyChainStep(_itemIndex, uint(items[_itemIndex]._state), address(items[_itemIndex]._item));
     }
     
     function triggerDelivery(uint _itemIndex) public onlyOwner {
         require(items[_itemIndex]._state == SupplyChainState.Paid, "Item is further in the chain");
         items[_itemIndex]._state = SupplyChainState.Delivered;
-        emit SupplyChainStep(itemIndex, uint(items[_itemIndex]._state), address(items[_itemIndex]._item));
+        emit SupplyChainStep(_itemIndex, uint(items[_itemIndex]._state), address(items[_itemIndex]._item));
     }
 }

@@ -9,6 +9,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "font-awesome": "^4.7.0",
+    "ipfs": "^0.55.1",
+    "ipfs-http-client": "^33.1.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-table-next": "^4.0.3",

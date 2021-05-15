@@ -8,7 +8,16 @@ import { Container, Button, Table } from 'react-bootstrap'
 
 class ItemManager extends Component {
     state = { loaded:false, cost:0, itemName:"test-name" };
+    
+    /*array = Array();
 
+    add_element_to_array() {
+      
+      array[x] = document.getElementById('outputItem').value;
+      alert("Element: " + array[x] + " Added at index " + x);
+      x++;
+    }
+*/
     componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
@@ -50,9 +59,10 @@ class ItemManager extends Component {
       let itemObj = await self.ItemManagerContract.methods.items(evt.returnValues._itemIndex).call();
       //let itemObj3 = await self.ItemManagerContract.methods.items(evt.returnValues._itemAddress).call();
       //let itemObj2 = await self.ItemManagerContract.methods.items(evt.returnValues._step).call();
+      //alert("Item " + itemObj._identifier + " was paid, deliver it now!");
       console.log(itemObj._step);
       console.log(self.ItemManagerContract.methods.items(evt.returnValues._step).call());
-      if(itemObj._state === "2"){
+      if(itemObj._state === "1"){
         alert("Item " + itemObj._identifier + " was paid, deliver it now!");
         document.getElementById('outputItem').innerText = "";
         document.getElementById('outputCost').innerText = "";
