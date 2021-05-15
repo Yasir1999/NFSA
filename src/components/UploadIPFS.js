@@ -130,6 +130,15 @@ getImages = (event) =>  {
   })
 }
 
+getImage = (event) =>  {
+  event.preventDefault()
+  const indID = this.state.indexID
+  this.state.contract.methods.ImageHashes(indID).call().then((r) => {
+    document.getElementById('outputImg').innerText = r;
+    this.setState({ imgHash: r })
+  })
+}
+
 
  
 
@@ -164,11 +173,13 @@ getImages = (event) =>  {
                 <p>&nbsp;</p>
                 <p>Total number of files saved:</p><span id="outputTotal"></span>
                 <p>Image output:</p><span id="outputImg"></span>
-                <form onSubmit={this.getImages}>
+                <form onSubmit={this.getImage}>
                   <input type='query' onChange={this.captureID}/>
                   <input type='submit' id='btn'/>
                 </form>
-                <button onClick={this.getImages}>Get Image</button>
+                <button onClick={this.getImage}>Get Image</button>
+
+                <img src={`https://ipfs.infura.io/ipfs/${this.state.indexID}`} />
                 </div>
                 </main>
           </div>
