@@ -64,7 +64,10 @@ async componentWillMount() {
       imgHash: [],
       indexID: null,
       totalImgs: null,
-      arrHash: []
+      arrHash: [],
+      itemArray: [],
+      itemName: [],
+      linkArray: []
     };
     this.handleChange = this.handleChange.bind(this)
   };
@@ -107,9 +110,9 @@ async componentWillMount() {
         console.error(error)
         return
       }
-      this.state.contract.methods.setHash(imgHash).send({ from: this.state.account }).then((_r) => {
-        this.setState({ imgHash: imgHash })
-        this.setState({ arrHash: imgHash })
+      this.state.contract.methods.setHash(imgHash).send({ from: this.state.account }).then((r) => {
+        this.setState({ imgHash: r })
+        this.setState({ arrHash: r })
       })
       //const res = imgHash
       //document.getElementById('outputItem').innerText = res;
@@ -140,6 +143,7 @@ getImage = (event) =>  {
   } else {
     this.state.contract.methods.ImageHashes(indID).call().then((result) => {
       document.getElementById('outputImg').innerText = result;
+      this.setState({ linkArray: "https://ipfs.infura.io/ipfs/"+result });
       this.setState({ imgHash: result })
     })
   }
@@ -150,23 +154,26 @@ getCount = (event) => {
   const amt = this.state.totalImgs
   console.log(amt);
   document.getElementById('outputAmt').innerText = amt;
+  this.state.contract.methods.numHashes().call().then((result) =>{
+    console.log(result-1);
+  })
 }
 
 getArray = (event) => {
   event.preventDefault()
   const amt = this.state.totalImgs
   const imgs = this.state.imgHash
-  console.log(amt + 1);
+  //console.log(amt + 1);
   console.log(this.state.contract.methods.getHash().call());
   var i;
   const output = []
   const output2 = this.state.imgHash
-  for (i=0; i <= amt; i++){
+  for (i=0; i < amt; i++){
     this.state.contract.methods.ImageHashes(i).call().then((res) => {
       output[i] = res;
       //console.log(output[i]);
       this.setState({ arrHash: output})
-      console.log("testign " + this.state.arrHash[i]);
+      console.log(i + " " + this.state.arrHash[i]);
       //document.getElementById('outputList').innerText = output[i];
   })
     //this.setState({ arrHash: output})
@@ -176,7 +183,7 @@ getArray = (event) => {
   
 }
   
-  renderOutput = () => {
+ /* renderOutput = () => {
     return this.state.arrHash.map((image, index) => {
       return (
             <tr>
@@ -185,7 +192,17 @@ getArray = (event) => {
             </tr>
       )
     })
-  }
+  }*/
+/*
+  renderOutput = () => {
+    return this.state.arrHash.map((arrHash, index) => (
+      <>
+        <td key={index}>{arrHash.itemName}</td>
+        <td key={index}>{arrHash.index}</td>
+      </>
+  ))
+  }*/
+
 
   handleChange(e) {
     console.log(e.target.value)
@@ -219,7 +236,8 @@ getArray = (event) => {
                   <input type='file' onChange={this.captureFile}/>
                   <input type='submit' id='btn'/>
                 </form>
-                {/*<a href={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} download="userfile">download file</a><br></br>*/}
+                <a href={this.state.linkArray}>Download</a>
+                {/*<a href={`https://ipfs.infura.io/ipfs/`} download="userfile">download file</a><br></br>*/}
                 <p>&nbsp;</p>
                 <p>Total number of files saved:</p><span id="outputTotal"></span>
                 <p>Image hash: <span id="outputImg">##########</span></p>
@@ -233,13 +251,15 @@ getArray = (event) => {
                   <input type='submit' id='btn'/>
                 </form>
                 <br></br>
+                {/*}
                 <table>
                   <tr>
                     <th>Index</th>
                     <th>IPFS Hash Value</th>
                   </tr>
-                    {this.renderOutput()}
+                    {/*{this.renderOutput()}
                 </table> 
+                */}
 
                 {/*<select onChange={this.handleChange}>
                   {this.state.arrHash.map(index => {

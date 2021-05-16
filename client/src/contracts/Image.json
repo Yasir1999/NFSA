@@ -18,8 +18,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -32,8 +31,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -59,8 +57,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -86,8 +83,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.6.1+commit.e6f7d5a4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ImageHashes\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getHash\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numHashes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_imgHash\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_imgHash\",\"type\":\"string\"}],\"name\":\"setHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/Scott/Desktop/Software Project - NFSA/NFSA/contracts/Image.sol\":\"Image\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Scott/Desktop/Software Project - NFSA/NFSA/contracts/Image.sol\":{\"keccak256\":\"0x2686da071368a20e9f98b410698cacbda4e976046da5b99974009de4ebab8490\",\"urls\":[\"bzz-raw://c677b3a82dfd4b25ea70016d2fd0ede0ae0ab0e46c5c4bef46b440ae7a4bfaf6\",\"dweb:/ipfs/QmTviMUxJ6tU4oHYLK7fBFsiPNGK7XWCPjx1VsCPGtfe7r\"]}},\"version\":1}",
@@ -1441,13 +1437,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x0628738ED3EeD618bC7c98d2aCBe5AA4d47a5546",
-      "transactionHash": "0x5dd7c0f298c80e48ea65cabdc4419f849a484e676e0680945945747545105ea7"
+      "address": "0x1F39a617E511A31b8cB42F2fF73F59Aa5600B65C",
+      "transactionHash": "0xe229b2dc79c74a2d52694d02f3732afc1ce0cb6f48089e6e3e5902bac0ece078"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-05-16T04:00:32.976Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-05-16T09:40:36.248Z",
   "devdoc": {
     "methods": {}
   },

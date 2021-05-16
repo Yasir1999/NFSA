@@ -37,8 +37,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -72,8 +71,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -104,8 +102,7 @@
       "name": "triggerPayment",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function",
-      "payable": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -131,8 +128,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -173,8 +169,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -203,8 +198,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.6.1+commit.e6f7d5a4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_itemIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_step\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_itemAddress\",\"type\":\"address\"}],\"name\":\"SupplyChainStep\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_identifier\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_itemPrice\",\"type\":\"uint256\"}],\"name\":\"createItem\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getItems\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"total\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_key\",\"type\":\"uint256\"}],\"name\":\"getValueAtMapping\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"contract Item\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isOwner\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"items\",\"outputs\":[{\"internalType\":\"contract Item\",\"name\":\"_item\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_identifier\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_itemPrice\",\"type\":\"uint256\"},{\"internalType\":\"enum ItemManager.SupplyChainState\",\"name\":\"_state\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_key\",\"type\":\"uint256\"}],\"name\":\"returnMapValue\",\"outputs\":[{\"components\":[{\"internalType\":\"contract Item\",\"name\":\"_item\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_identifier\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_itemPrice\",\"type\":\"uint256\"},{\"internalType\":\"enum ItemManager.SupplyChainState\",\"name\":\"_state\",\"type\":\"uint8\"}],\"internalType\":\"struct ItemManager.S_Item\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_itemIndex\",\"type\":\"uint256\"}],\"name\":\"triggerDelivery\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_itemIndex\",\"type\":\"uint256\"}],\"name\":\"triggerPayment\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/Scott/Desktop/Software Project - NFSA/NFSA/contracts/ItemManager.sol\":\"ItemManager\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Scott/Desktop/Software Project - NFSA/NFSA/contracts/Item.sol\":{\"keccak256\":\"0x76e913b9b61f8efe73bed38334605821175d89dd5ba8a4e09e303508d56eb064\",\"urls\":[\"bzz-raw://0c7708fbd9bb959685e04424b64462ea7e572536e2f419476239a8c11c59fd7b\",\"dweb:/ipfs/QmRa4KPqpKjhaLm5ThaP7cBSRTZyuTY1cvgT2v2NCSsRCQ\"]},\"/C/Users/Scott/Desktop/Software Project - NFSA/NFSA/contracts/ItemManager.sol\":{\"keccak256\":\"0x788ece6a0070d709189a0a0e136d02e2cf0dea6987db43923a08c2545e8d2ca7\",\"urls\":[\"bzz-raw://dc7bc2eca953a3ba8df1a2614ef406e0fc9cfe122e17c180dc0ac5b2aba33ae9\",\"dweb:/ipfs/Qmc7up5Yg8A2xbKopZmwANQAwmEtfKGUBKAYE1KfuTDtF1\"]},\"/C/Users/Scott/Desktop/Software Project - NFSA/NFSA/contracts/Ownable.sol\":{\"keccak256\":\"0xd1493fc1d0dabd8dc2ba6e382ff116b9b6f3fea63e5b8ca0ef6e6d6a2ad8ea1d\",\"urls\":[\"bzz-raw://7cee34121c79a1789e5b064e692e50d614408909469a1363a4f779e765b533c2\",\"dweb:/ipfs/QmaXeajD5JwfaCc52qWa9pcEzmJ2cYMGBTnv5MyWEuAVML\"]}},\"version\":1}",
@@ -7028,13 +7022,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x49440bEEA043D75Ebf946Ee89300eD9e09A13B79",
-      "transactionHash": "0xe786a15de9941a67cbffb72feda7a48c4a2673d73ca36e70e78b464c7d4b84e8"
+      "address": "0xFea732E12AAeAA9aB5EA88F88BDBDf889c810bAd",
+      "transactionHash": "0x3691897e4a705cd4f9f00b09cfd323138e8e6b7b5f9d07fb2ecf1dc383d21433"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-05-16T04:00:32.972Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-05-16T09:40:52.386Z",
   "devdoc": {
     "methods": {}
   },
