@@ -1,4 +1,5 @@
 pragma solidity ^0.6.0;
+pragma experimental ABIEncoderV2;
 
 import "./Ownable.sol";
 import "./Item.sol";
@@ -40,5 +41,17 @@ contract ItemManager is Ownable {
         require(items[_itemIndex]._state == SupplyChainState.Paid, "Item is further in the chain");
         items[_itemIndex]._state = SupplyChainState.Delivered;
         emit SupplyChainStep(_itemIndex, uint(items[_itemIndex]._state), address(items[_itemIndex]._item));
+    }
+
+    function getItems() public view returns(uint total){
+        return itemIndex;
+    }
+
+    function returnMapValue(uint _key) public view returns(S_Item memory) {
+        return items[_key];
+    }
+
+    function getValueAtMapping(uint _key)  public  view  returns(string memory, uint, Item) {
+      return (items[_key]._identifier, items[_key]._itemPrice, items[_key]._item);
     }
 }

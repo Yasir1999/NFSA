@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import Image from '../contracts/Image.json';
 import Web3 from "web3";
 import { Button } from 'react-bootstrap';
+import './UploadIPFS.css';
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({host: 'ipfs.infura.io', port: '5001', protocol: 'https'})
@@ -65,7 +66,8 @@ async componentWillMount() {
       totalImgs: null,
       arrHash: []
     };
-  }
+    this.handleChange = this.handleChange.bind(this)
+  };
 
   async loadWeb3() {
     if (window.ethereum) {
@@ -185,7 +187,11 @@ getArray = (event) => {
     })
   }
 
- 
+  handleChange(e) {
+    console.log(e.target.value)
+  }
+
+
 
   render() {
     
@@ -194,7 +200,7 @@ getArray = (event) => {
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
-                  <img src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} />
+                  <img src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} className="img-resize" />
                   <p>&nbsp;</p>
                   {/*<Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} />
@@ -216,7 +222,7 @@ getArray = (event) => {
                 {/*<a href={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} download="userfile">download file</a><br></br>*/}
                 <p>&nbsp;</p>
                 <p>Total number of files saved:</p><span id="outputTotal"></span>
-                <p>Image output: <span id="outputImg">IPFS Hash Will Be Displayed Here</span></p>
+                <p>Image hash: <span id="outputImg">##########</span></p>
                 <p>Count: <span id="outputAmt"></span></p>
                 <Button onClick={this.getCount} variant='dark'>get count</Button>
                 <br></br>
@@ -234,6 +240,14 @@ getArray = (event) => {
                   </tr>
                     {this.renderOutput()}
                 </table> 
+
+                {/*<select onChange={this.handleChange}>
+                  {this.state.arrHash.map(index => {
+                    return (
+                      <option value={index}>{index}</option>
+                    )
+                  })}
+                </select>*/}
                 <br></br>
                 </div>
                 </main>
