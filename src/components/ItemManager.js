@@ -26,7 +26,9 @@ class ItemManager extends Component {
         indexID: null,
         arrayOfItems: [],
         totalImgs: null,
-        imgHash: []
+        imgHash: [],
+        sendAddress: null,
+        sendCost: null
       }
       this.handleChange = this.handleChange.bind(this)
     };
@@ -143,7 +145,6 @@ class ItemManager extends Component {
     } else {
       window.alert('networkDataItem Smart contract not deployed to the detected network')
     }*/
-    this.getCount()
     this.listenToPaymentEvent();
     this.setState({ loaded:true });
   }
@@ -170,7 +171,7 @@ class ItemManager extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.listenToPaymentEvent();
+      //this.listenToPaymentEvent();
       this.setState({ loaded:true });
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -285,6 +286,41 @@ class ItemManager extends Component {
     })
     //console.log(amt);
     //document.getElementById('outputAmt').innerText = amt;
+  }
+
+  getAddress = (event) => {
+    event.preventDefault()
+    const sendAdd = event.target.value;
+    this.setState({ sendAddress: sendAdd })
+    /*if (sendAdd.length < 42 || sendAdd.length > 42){
+      alert("error: invalid address: " + sendAdd);
+    } else if (sendAdd.length = 42) {
+    this.setState({ sendAddress: sendAdd })
+    }*/
+  }
+
+  getPrice = (event) => {
+    event.preventDefault()
+    const sendValue = event.target.value;
+    this.setState({ sendCost: sendValue })
+  }
+
+  
+  sendRoyalty = () => {
+    const payeeAdd = this.state.accounts[0];
+    const sendAdd = this.state.sendAdd;
+    const sendCost = this.state.sendCost;
+    const web3_utils = require('web3-utils');
+    if (sendAdd.length < 42 || sendAdd.length > 42){
+      alert("error: invalid address: " + sendAdd);
+    } else if (sendCost === "") {
+      alert("error: invalid price to pay: " + sendCost);
+    } else if (sendAdd.length = 42 && sendCost !== "") {
+      window.web3 = new Web3(window.ethereum)
+      this.web3.eth.sendTransaction({from: payeeAdd,
+      to: sendAdd,
+      value: web3_utils.fromWei(sendCost)})
+    }
   }
 
   getArray = (event) => {
@@ -431,17 +467,25 @@ class ItemManager extends Component {
                     {/*<th>Index</th>*/}
                   </tr>
                     {this.renderOutput()}
-                </table> 
-                <br></br>
-                <select onChange={this.handleChange}>
-                  {this.state.imgHash.map(index => {
-                    return (
-                      <option value={index}>{index}</option>
-                    )
-                  })}
-                </select>
+              </table> 
+              <br></br>
+              <select onChange={this.handleChange}>
+                {this.state.imgHash.map(index => {
+                  return (
+                    <option value={index}>{index}</option>
+                  )
+                })}
+              </select>
+              
+              <form onSubmit={this.sendRoyalty}>
+                <p>Address To:</p>
+                <input type='text' onChange={this.getAddress}></input>
+                <p>Price to send: </p>
+                <input type='text' onChange={this.getPrice}></input>
+                <input type='submit' id='btn2'/>
+              </form>
 
-                <Button onClick={this.renderObjects}>Load Data</Button>
+              <Button onClick={this.renderObjects}>Load Data</Button>
           </div>
         </Container>
       );

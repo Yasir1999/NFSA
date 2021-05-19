@@ -8,10 +8,16 @@ import { Container, Button } from 'react-bootstrap'
 
 
 class ItemPayment extends Component {
-    state = { loaded:false, cost:0, toAddress:"0x00" };
+    //state = { loaded:false, cost: 0, toAddress: 0, account: null };
 
-
-    
+    constructor(props) {
+      super(props);
+      this.state = {
+        loaded:false, 
+        cost: null, 
+        toAddress: null
+      }
+    }
 
     componentDidMount = async () => {    
         
@@ -20,8 +26,11 @@ class ItemPayment extends Component {
           this.web3 = await getWeb3();
     
           // Use web3 to get the user's accounts.
-          this.accounts = await this.web3.eth.getAccounts();
-    
+          /*this.accounts = await this.web3.eth.getAccounts();
+          const uaccount = this.accounts;
+          this.setState({account: uaccount[0]})*/
+          const accounts = await this.web3.eth.getAccounts()
+          this.setState({account: accounts[1]})
           // Get the contract instance.
           this.networkId = await this.web3.eth.net.getId();
           this.ItemManagerContract = new this.web3.eth.Contract(
@@ -76,12 +85,16 @@ class ItemPayment extends Component {
     }
 
     handleSubmit = async() => {
-        const Web3 = require("web3");
-        const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:" + 7545));
-        const web3_utils = require('web3-utils');
-        const accounts = await web3.eth.getAccounts();
-        const { cost, toAddress } = this.state;
-        console.log(toAddress, cost, this.ItemManagerContract);
+        //const Web3 = require("web3");
+        const Web3 = await getWeb3();
+        //const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:" + 7545));
+        //const web3_utils = require('web3-utils');
+        //const accounts = await web3.eth.getAccounts();
+
+        const cost = this.state.cost;
+        const toAdd = this.state.toAddress;
+        const fromAdd = this.state.account[0];
+        console.log("To address: " + toAdd, cost, this.ItemManagerContract);
         //let account = this.web3.eth.getAccounts();
         //let weiValue = web3_utils.fromWei(cost, "ether");
         //let payNow = await this.web3.eth.sendTransaction({from: account, to: toAddress, value: cost});0x740a9222503F6382694FD8E0f5e2916fCb394F5F
@@ -89,8 +102,26 @@ class ItemPayment extends Component {
         console.log(payNow);*/    
         //web3.eth.sendTransaction({from: accounts[0],to: toAddress, value: web3_utils.hexToNumberString(web3_utils.asciiToHex(web3_utils.fromWei(cost, 'ether')))})
         
-        web3.eth.sendTransaction({from: accounts[0],to: toAddress, value: web3_utils.numberToHex(cost)})
+        //this.web3.eth.sendTransaction({from: this.accounts,to: toAdd, value: cost })
+        let web3js = new Web3(window.web3.currentProvider); 
+        web3js.eth.sendTransaction({
+            from: "0x986F06Ac4Ae8344189d1181FbB34d00A9614231f",  
+            to: toAdd,
+            value: cost, 
+        })      
     };
+
+    getPrice = (event) => {
+      event.preventDefault()
+      const sendValue = event.target.value;
+      this.setState({ cost: sendValue })
+    }
+
+    getAddress = (event) => {
+      event.preventDefault()
+      const sendAdd = event.target.value;
+      this.setState({ toAddress: sendAdd })
+    }
 
 
 /*
@@ -126,10 +157,10 @@ class ItemPayment extends Component {
                   </div>
                   <div className="col-2">
                     <div className="row div-space">
-                      <input type="text" name="cost" value={this.state.cost} onChange={this.handleInputChange} />
+                      <input type="text" name="cost" onChange={this.getPrice} />
                     </div>
                     <div className="row div-space">
-                        <input type="text" name="toAddress" value={this.state.toAddress} onChange={this.handleInputChange} />
+                        <input type="text" name="toAddress" onChange={this.getAddress} />
                     </div>
                   </div>
                 </div>
