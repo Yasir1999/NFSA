@@ -324,6 +324,10 @@ getArray = (event) => {
 
 
   render() {
+    const arrHash = [{
+      arrName: [],
+      arrHVal: []
+    }];
     return (
         <div className="container-fluid mt-5">
           <div className="row">
@@ -384,7 +388,42 @@ getArray = (event) => {
                         <td>{item.arrHVal}</td>
                     ))}
                     </tr>
+                    console.log(this.state.arrHash);
                   })}
+                  
+                </table>
+
+                <table>
+                  <tr>
+                    <th>Name2</th>
+                    <th>Hash2</th>
+                  </tr>
+                  {Object.keys(arrHash).map((item, index) => (
+                      arrHash[index].arrName.map((el,i) => (
+                      <tr key={index}>
+                        <td>{el}</td>
+                        <td>{arrHash[index].arrHVal[i]}</td>
+                      </tr>
+
+                      ))
+                      ))}
+                </table>
+
+
+                <table>
+                  <tr>
+                    <th>Name3</th>
+                    <th>Hash3</th>
+                  </tr>
+                  {this.state.arrHash.map((item, index) => (
+                      this.state.arrHash[index].arrName.map((el,i) => (
+                      <tr key={index}>
+                        <td>{el}</td>
+                        <td>{this.state.arrHash[index].arrHVal[i]}</td>
+                      </tr>
+
+                      ))
+                      ))}
                 </table>
              {/*
                     {this.state.arrHash.map(eachItem => (
