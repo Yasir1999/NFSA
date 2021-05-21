@@ -10,13 +10,13 @@ import Image from '../contracts/Image.json';
 
 
 class ItemManager extends Component {
-    state = { loaded:false, cost:0, itemName:"test-name" };
+    state = { loaded: false, cost: 0, itemName: "test"  };
 
     constructor(props) {
       super(props);
       this.state = {
         itemArray: [],
-        itemName: [],
+        //itemName: [],
         itemAddress: [],
         itemCost: [],
         totalCount: null,
@@ -26,7 +26,17 @@ class ItemManager extends Component {
         indexID: null,
         arrayOfItems: [],
         totalImgs: null,
+        imgName: [],
         imgHash: [],
+        arrHash: [{
+          arrName: [],
+          arrHVal: []
+        }],
+        arrCon: [{
+          arrConName: [],
+          arrConAdd: [],
+          arrConCost: []
+        }],
         sendAddress: null,
         sendCost: null
       }
@@ -94,6 +104,7 @@ class ItemManager extends Component {
     }
   }
 
+
   async loadBlockchainData() {
     
     const web3 = window.web3
@@ -107,12 +118,13 @@ class ItemManager extends Component {
     if(networkDataImage) {
       const abi = Image.abi
       const address = networkDataImage.address
-      const contract = new web3.eth.Contract(abi, address)
-      this.setState({ imageContract: contract})
-      const imgHash = await contract.methods.getHash().call()
+      const contract2 = new web3.eth.Contract(abi, address)
+      this.setState({ imageContract: contract2})
+      const imgHash = await contract2.methods.getHash().call()
       this.setState({ imgHash: imgHash })
-      const sumImg = await contract.methods.numHashes().call()
-      this.setState({ totalImgs: sumImg-1})
+      const sumImg = await contract2.methods.numHashes().call()
+      this.setState({ totalImgs: sumImg})
+      await this.loadArray();
     } else {
       window.alert('networkDataImage Smart contract not deployed to the detected network')
     }
@@ -146,8 +158,28 @@ class ItemManager extends Component {
       window.alert('networkDataItem Smart contract not deployed to the detected network')
     }*/
     this.listenToPaymentEvent();
+    await this.renderOutput();
+    await this.getItemsArray();
     this.setState({ loaded:true });
   }
+
+  async loadArray() {
+    const amt = this.state.totalImgs
+      for (var i=0; i < amt; i++){
+        this.state.imageContract.methods.getImgHash(i).call().then((res) => {
+        var a = res[0];
+        var b = res[1];
+          this.setState(prevState => ({
+            arrHash: [{
+              ...prevState.arrHash[0],
+              arrHVal: [...prevState.arrHash[0].arrHVal, b],
+              arrName: [...prevState.arrHash[0].arrName, a]
+            }],
+          }));
+        })
+    }
+  }
+
 
   componentDidMount = async () => {
     try {
@@ -167,6 +199,11 @@ class ItemManager extends Component {
       this.item = new this.web3.eth.Contract(
         ItemContract.abi,
         ItemContract.networks[this.networkId] && ItemContract.networks[this.networkId].address,
+      );
+
+      this.state.imageContract = new this.web3.eth.Contract(
+        Image.abi,
+        Image.networks[this.networkId] && Image.networks[this.networkId].address,
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -216,7 +253,9 @@ class ItemManager extends Component {
   }
 
   handleSubmit = async() => {
+    //const { cost } = this.state;
     const { cost, itemName } = this.state;
+    //const iM = this.state.itemName;
     console.log(itemName, cost, this.state.itemManagerContract);
     let result = await this.state.itemManagerContract.methods.createItem(itemName, cost).send({from: this.accounts[0]});
     console.log(result);
@@ -242,9 +281,13 @@ class ItemManager extends Component {
       this.setState({itemName: Iname});
       this.setState({itemAddress: Iadd});
       this.setState({itemCost: Icost});
+      console.log(this.Iname[0]);
+      console.log(this.Iadd[0]);
+      console.log(this.Icost[0]);
       console.log(this.state.itemName);
       console.log(this.state.itemAddress);
       console.log(this.state.itemCost);
+      this.setState({})
 
       
       document.getElementById('outputItem').innerText = awaitItem;
@@ -397,11 +440,48 @@ class ItemManager extends Component {
     console.log(e.target.value)
   }
 
+  getItemSelect = (event) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    this.setState({ itemName: value })
+    document.getElementById('outputtesting').innerText = this.state.itemName;
+    console.log(this.state.itemName);
+  }
+
   renderObjects = (event) => {
     event.preventDefault()
     this.componentWillMount();
   }
-
+  
+  async getItemsArray() {
+    this.state.itemManagerContract.methods.getItems().call().then((total) => {
+      this.setState({ totalCount: total})
+      document.getElementById('outputAmt').innerText = total;
+      console.log(total);
+      console.log("State: " + this.state.totalCount);
+      const amt = this.state.totalCount;
+      console.log("amoutn working: " + amt);
+      for (var i=0; i < amt; i++){
+        this.state.itemManagerContract.methods.getValueAtMapping(i).call().then((res) => {
+        var a = res[0];
+        var b = res[1];
+        var c = res[2];
+          this.setState(prevState => ({
+            arrCon: [{
+              ...prevState.arrCon[0],
+              arrConName: [...prevState.arrCon[0].arrConName, a],
+              arrConCost: [...prevState.arrCon[0].arrConCost, b],
+              arrConAdd: [...prevState.arrCon[0].arrConAdd, c]
+            }],
+          }));
+          console.log("Name " + this.state.arrCon[0].arrConName);
+          console.log("Cost " + this.state.arrCon[0].arrConCost);
+          console.log("Address " + this.state.arrCon[0].arrConAdd);
+        })
+        //console.log(this.state.itemManagerContract.methods.getImgHash(0).call());
+    }
+  })
+}
 
     render() {
       return (
@@ -443,6 +523,16 @@ class ItemManager extends Component {
                   </div>
                   <div className="row div-space">
                       <input type="text" name="itemName" value={this.state.itemName} onChange={this.handleInputChange} />
+                      {/*<select onChange={this.getItemSelect}>
+                        {this.state.arrHash.map((item, index) => (
+                                  this.state.arrHash[index].arrName.map((el,i) => (
+                                  <option value={el}>{el}</option>
+                                  ))
+                                ))}
+                      </select>
+
+                      <span id="outputtesting"></span>*/}
+
                   </div>
                 </div>
               </div>
@@ -453,7 +543,7 @@ class ItemManager extends Component {
               </div>
               <Button onClick={this.getCount} variant='dark'>get count</Button>
               <p>Count: <span id="outputAmt"></span></p>
-              <Button onClick={this.getArray} variant='dark'>get array</Button>
+              {/*<Button onClick={this.getItemsArray} variant='dark'>get array</Button>*/}
               <form onSubmit={this.getItemAt}>
                   <input type='text' onChange={this.captureID}/>
                   <input type='submit' id='btn'/>
@@ -461,21 +551,33 @@ class ItemManager extends Component {
                 <span id="outputArr"></span>
               <table>
                   <tr>
+                    <th>Index</th>
                     <th>Item</th>
                     <th>Payment Address</th>
                     <th>Cost</th>
-                    {/*<th>Index</th>*/}
                   </tr>
-                    {this.renderOutput()}
+                  {this.state.arrCon.map((item, index) => (
+                        this.state.arrCon[index].arrConName.map((el,i) => (
+                        <tr key={index}>
+                          <td>{i+1}</td>
+                          <td>{el}</td>
+                          <td>{this.state.arrCon[index].arrConAdd[i]}</td>
+                          <td>{this.state.arrCon[index].arrConCost[i]}</td>
+                        </tr>
+                        ))
+                        ))}
               </table> 
               <br></br>
-              <select onChange={this.handleChange}>
+              <select onChange={this.getItemSelect}>
                 {this.state.imgHash.map(index => {
                   return (
                     <option value={index}>{index}</option>
                   )
                 })}
               </select>
+
+
+
               
               <form onSubmit={this.sendRoyalty}>
                 <p>Address To:</p>

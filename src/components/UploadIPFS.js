@@ -392,39 +392,27 @@ getArray = (event) => {
                 </form>
                 <br></br>
                 <Button onClick={this.getImgNameFromContract}>get name</Button>
+                <br></br>
+                <br></br>
+                <div className="container">
+                  <table>
+                    <tr>
+                      <th>Index</th>
+                      <th>Item Name</th>
+                      <th>Item Hash</th>
+                    </tr>
+                    {this.state.arrHash.map((item, index) => (
+                        this.state.arrHash[index].arrName.map((el,i) => (
+                        <tr key={index}>
+                          <td>{i+1}</td>
+                          <td>{el}</td>
+                          <td>{this.state.arrHash[index].arrHVal[i]}</td>
+                        </tr>
+                        ))
+                        ))}
+                  </table>
+                </div>
 
-                <table>
-                  <tr>
-                    <th>Item Name</th>
-                    <th>Item Hash</th>
-                  </tr>
-                  {this.state.arrHash.map((item, index) => (
-                      this.state.arrHash[index].arrName.map((el,i) => (
-                      <tr key={index}>
-                        <td>{el}</td>
-                        <td>{this.state.arrHash[index].arrHVal[i]}</td>
-                      </tr>
-                      ))
-                      ))}
-                </table>
-
-
-                <CardGroup>
-                  {this.state.arrHash.map((item, index) => (
-                      this.state.arrHash[index].arrName.map((el,i) => (
-                        <Card key={index} style={{ width: '18rem'}}>
-                          <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`} className="img-resize"></Card.Img>
-                          <Card.Body>
-                            <Card.Title>Item Name: {el}</Card.Title>
-                            <Card.Text>
-                              IPFS Hash: {this.state.arrHash[index].arrHVal[i]} <br></br>
-                              <a href={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`}>Link To Item</a>
-                            </Card.Text>
-                          </Card.Body>
-                        </Card>
-                    ))
-                    ))}
-                </CardGroup>
                 
 
              {/*
@@ -478,6 +466,25 @@ getArray = (event) => {
                 <br></br>
                 </div>
                 </main>
+                
+                <div className="container">
+                  {/*<CardGroup>
+                    {this.state.arrHash.map((item, index) => (
+                        this.state.arrHash[index].arrName.map((el,i) => (
+                          <Card key={index} style={{ width: '18rem'}}>
+                            <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`} className="img-resize"></Card.Img>
+                            <Card.Body>
+                              <Card.Title>Item Name: {el}</Card.Title>
+                              <Card.Text>
+                                IPFS Hash: {this.state.arrHash[index].arrHVal[i]} <br></br>
+                                <a href={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`}>Link To Item</a>
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                      ))
+                      ))}
+                        </CardGroup>*/}
+                </div>
           </div>
         </div>
     );
