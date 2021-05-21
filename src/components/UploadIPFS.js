@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import Image from '../contracts/Image.json';
 import Web3 from "web3";
-import { Button } from 'react-bootstrap';
+import { Button, Card, CardGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import './UploadIPFS.css';
 
 const ipfsClient = require('ipfs-http-client')
@@ -13,6 +13,7 @@ class UploadIPFS extends Component {
 async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
+
 //    await this.getCount()
     
     /*let images = [];
@@ -51,6 +52,8 @@ async componentWillMount() {
       this.setState({ imgHash: imgHash })
       const sumImg = await contract.methods.numHashes().call()
       this.setState({ totalImgs: sumImg})
+      await this.loadArray()
+      await this.updateCount()
     } else {
       window.alert('Smart contract not deployed to the detected network')
     }
@@ -147,14 +150,17 @@ async componentWillMount() {
       })
       //const res = imgHash
       //document.getElementById('outputItem').innerText = res;
-      this.state.contract.methods.numHashes().call().then((r) => {
-        let a = [];
-        let sS = this.setState.totalImgs;
-        a.push(document.getElementById('outputTotal').innerText = r);
-        sS = r;
-        console.log(sS);
-      })
+      
     })
+    this.state.contract.methods.numHashes().call().then((r) => {
+      //let a = [];
+      let res = this.setState({totalImgs: r});
+      document.getElementById('outputTotal').innerText = res;
+      console.log(res);
+    })
+    this.updateCount();
+    //this.loadArray();
+    
 }
 /*
 getImages = (event) =>  {
@@ -164,6 +170,23 @@ getImages = (event) =>  {
     document.getElementById('outputImg').innerText = r;
   })
 }*/
+
+async loadArray() {
+  const amt = this.state.totalImgs
+    for (var i=0; i < amt; i++){
+      this.state.contract.methods.getImgHash(i).call().then((res) => {
+      var a = res[0];
+      var b = res[1];
+        this.setState(prevState => ({
+          arrHash: [{
+            ...prevState.arrHash[0],
+            arrHVal: [...prevState.arrHash[0].arrHVal, b],
+            arrName: [...prevState.arrHash[0].arrName, a]
+          }],
+        }));
+      })
+  }
+}
 
 getImage = (event) =>  {
   event.preventDefault()
@@ -188,8 +211,7 @@ getImage = (event) =>  {
   }
 }
 
-getCount = (event) => {
-  event.preventDefault()
+async updateCount(){
   const amt = this.state.totalImgs
   console.log(amt);
   if (amt === 0){
@@ -200,16 +222,30 @@ getCount = (event) => {
       console.log(result);
     })
   }
+}
+
+getCount = (event) => {
+  event.preventDefault()
+  const amt = this.state.totalImgs
+  console.log(amt);
+  if (amt === 0){
+    document.getElementById('outputAmt').innerText = amt + 1;
+  } else if (amt > 0){
+    document.getElementById('outputAmt').innerText = amt;
+    this.state.contract.methods.numHashes().call().then((result) =>{
+      document.getElementById('outputAmt').innerText = result;
+    })
+  }
 
 }
 
 getArray = (event) => {
   event.preventDefault()
   const amt = this.state.totalImgs
-  const imgs = this.state.imgHash
+  //const imgs = this.state.imgHash
   //console.log(amt + 1);
-  console.log(this.state.contract.methods.getHash().call());
-  var j;
+  //console.log(this.state.contract.methods.getHash().call());
+  //var j;
   //const output = []
   //const output2 = []
   //const output2 = this.state.imgHash
@@ -333,23 +369,9 @@ getArray = (event) => {
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
-                  {/*<video width="750" height="500" controls >
-                    <source src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}.mpg`} type="video/mpg"/>
-                  </video>*/}
                   <img src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} className="img-resize" />
                   <p>&nbsp;</p>
                   <p>File Name: <span id='outputImgName'></span></p>
-                  {/*<Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} />
-                    <Card.Body>
-                      <Card.Title>Card Title</Card.Title>
-                      <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                      </Card.Text>
-                      <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                  </Card>*/}
                 <p>&nbsp;</p>
                 <h2>Change image</h2>
                 <form onSubmit={this.onSubmit}>
@@ -357,15 +379,12 @@ getArray = (event) => {
                   <input type='text' onChange={this.captureName}/>
                   <input type='submit' id='btn'/>
                 </form>
-                <a href={this.state.linkArray}>Download</a>
-                {/*<a href={`https://ipfs.infura.io/ipfs/`} download="userfile">download file</a><br></br>*/}
                 <p>&nbsp;</p>
                 <p>Total number of files saved:</p><span id="outputTotal"></span>
                 <p>Image hash: <span id="outputImg">##########</span></p>
                 <p>Count: <span id="outputAmt"></span></p>
                 <Button onClick={this.getCount} variant='dark'>get count</Button>
                 <br></br>
-                <Button onClick={this.getArray} variant='dark'>get array</Button>
                 <br></br>
                 <form onSubmit={this.getImage}>
                   <input type='text' onChange={this.captureID}/>
@@ -373,47 +392,11 @@ getArray = (event) => {
                 </form>
                 <br></br>
                 <Button onClick={this.getImgNameFromContract}>get name</Button>
-                
-                <table>
-                  <tr>
-                    <th>Name</th>
-                    <th>Hash</th>
-                  </tr>
-                  {this.state.arrHash.map(index => {
-                    <tr key={index}>
-                    {this.state.arrHash.map(item => (
-                        <td>{item.arrName}</td>
-                    ))}
-                    {this.state.arrHash.map(item => (
-                        <td>{item.arrHVal}</td>
-                    ))}
-                    </tr>
-                    console.log(this.state.arrHash);
-                  })}
-                  
-                </table>
 
                 <table>
                   <tr>
-                    <th>Name2</th>
-                    <th>Hash2</th>
-                  </tr>
-                  {Object.keys(arrHash).map((item, index) => (
-                      arrHash[index].arrName.map((el,i) => (
-                      <tr key={index}>
-                        <td>{el}</td>
-                        <td>{arrHash[index].arrHVal[i]}</td>
-                      </tr>
-
-                      ))
-                      ))}
-                </table>
-
-
-                <table>
-                  <tr>
-                    <th>Name3</th>
-                    <th>Hash3</th>
+                    <th>Item Name</th>
+                    <th>Item Hash</th>
                   </tr>
                   {this.state.arrHash.map((item, index) => (
                       this.state.arrHash[index].arrName.map((el,i) => (
@@ -421,10 +404,29 @@ getArray = (event) => {
                         <td>{el}</td>
                         <td>{this.state.arrHash[index].arrHVal[i]}</td>
                       </tr>
-
                       ))
                       ))}
                 </table>
+
+
+                <CardGroup>
+                  {this.state.arrHash.map((item, index) => (
+                      this.state.arrHash[index].arrName.map((el,i) => (
+                        <Card key={index} style={{ width: '18rem'}}>
+                          <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`} className="img-resize"></Card.Img>
+                          <Card.Body>
+                            <Card.Title>Item Name: {el}</Card.Title>
+                            <Card.Text>
+                              IPFS Hash: {this.state.arrHash[index].arrHVal[i]} <br></br>
+                              <a href={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`}>Link To Item</a>
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                    ))
+                    ))}
+                </CardGroup>
+                
+
              {/*
                     {this.state.arrHash.map(eachItem => (
                       <div>
