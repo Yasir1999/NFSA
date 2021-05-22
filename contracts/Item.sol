@@ -1,4 +1,6 @@
 pragma solidity ^0.6.0;
+//import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.6/contracts/payment/PaymentSplitter.sol";
+import "@openzeppelin/contracts/payment/PaymentSplitter.sol";
 
 import "./ItemManager.sol";
 

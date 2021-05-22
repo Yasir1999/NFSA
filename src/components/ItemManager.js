@@ -145,7 +145,7 @@ class ItemManager extends Component {
 
     
 
-    /*if(networkDataItem) {
+  /*if(networkDataItem) {
       const abi = ItemContract.abi
       const address = networkDataItem.address
       const contract = new web3.eth.Contract(abi, address)
@@ -157,6 +157,7 @@ class ItemManager extends Component {
     } else {
       window.alert('networkDataItem Smart contract not deployed to the detected network')
     }*/
+
     this.listenToPaymentEvent();
     await this.renderOutput();
     await this.getItemsArray();
@@ -263,7 +264,7 @@ class ItemManager extends Component {
     console.log(result.events.SupplyChainStep.returnValues._step);
     if (result.events.SupplyChainStep.returnValues._step !== 1){
       //this.setState({ itemArray: result })
-      let a = [];
+      /*let a = [];
       let Iname = [];
       let Iadd = [];
       let Icost = [];
@@ -281,13 +282,16 @@ class ItemManager extends Component {
       this.setState({itemName: Iname});
       this.setState({itemAddress: Iadd});
       this.setState({itemCost: Icost});
-      console.log(this.Iname[0]);
-      console.log(this.Iadd[0]);
-      console.log(this.Icost[0]);
+      //console.log(this.Iname[0]);
+      //console.log(this.Iadd[0]);
+      //console.log(this.Icost[0]);
       console.log(this.state.itemName);
       console.log(this.state.itemAddress);
       console.log(this.state.itemCost);
-      this.setState({})
+      //this.setState({})*/
+      let awaitCost = cost;
+      let awaitAddress = result.events.SupplyChainStep.returnValues._itemAddress;
+      let awaitItem = itemName;
 
       
       document.getElementById('outputItem').innerText = awaitItem;
@@ -350,20 +354,26 @@ class ItemManager extends Component {
 
   
   sendRoyalty = () => {
-    const payeeAdd = this.state.accounts[0];
-    const sendAdd = this.state.sendAdd;
+    const payeeAdd = 0xb91a9f776C0EaA7e3204433b1Cf2282e026B8581;
+    //this.state.accounts[0];
+    const sendAdd = 0xe879D0FcF2450eFb76bE55Dc3b73E8Ad58C5Dc2F;
+    //this.state.sendAdd;
     const sendCost = this.state.sendCost;
     const web3_utils = require('web3-utils');
+    this.web3.eth.sendTransaction({from: payeeAdd,
+      to: sendAdd,
+      value: web3_utils.fromWei(sendCost)})
+    /*
     if (sendAdd.length < 42 || sendAdd.length > 42){
       alert("error: invalid address: " + sendAdd);
-    } else if (sendCost === "") {
+    } else if (sendCost === 0) {
       alert("error: invalid price to pay: " + sendCost);
-    } else if (sendAdd.length = 42 && sendCost !== "") {
-      window.web3 = new Web3(window.ethereum)
+    } else if (sendAdd.length === 42 && sendCost !== 0) {
+      //window.web3 = new Web3(window.ethereum)
       this.web3.eth.sendTransaction({from: payeeAdd,
       to: sendAdd,
       value: web3_utils.fromWei(sendCost)})
-    }
+    }*/
   }
 
   getArray = (event) => {
@@ -556,6 +566,7 @@ class ItemManager extends Component {
                     <th>Payment Address</th>
                     <th>Cost</th>
                   </tr>
+                  {/*
                   {this.state.arrCon.map((item, index) => (
                         this.state.arrCon[index].arrConName.map((el,i) => (
                         <tr key={index}>
@@ -565,7 +576,7 @@ class ItemManager extends Component {
                           <td>{this.state.arrCon[index].arrConCost[i]}</td>
                         </tr>
                         ))
-                        ))}
+                        ))}*/}
               </table> 
               <br></br>
               <select onChange={this.getItemSelect}>
@@ -581,9 +592,11 @@ class ItemManager extends Component {
               
               <form onSubmit={this.sendRoyalty}>
                 <p>Address To:</p>
-                <input type='text' onChange={this.getAddress}></input>
+                {/*<input type='text' onChange={this.getAddress}></input>*/}
+                <input type='number'></input>
                 <p>Price to send: </p>
-                <input type='text' onChange={this.getPrice}></input>
+                {/*<input type='text' onChange={this.getPrice}></input>*/}
+                <input type='number'></input>
                 <input type='submit' id='btn2'/>
               </form>
 

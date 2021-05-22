@@ -86,7 +86,7 @@ class ItemPayment extends Component {
 
     handleSubmit = async() => {
         //const Web3 = require("web3");
-        const Web3 = await getWeb3();
+        //const Web3 = await getWeb3();
         //const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:" + 7545));
         //const web3_utils = require('web3-utils');
         //const accounts = await web3.eth.getAccounts();
@@ -103,11 +103,11 @@ class ItemPayment extends Component {
         //web3.eth.sendTransaction({from: accounts[0],to: toAddress, value: web3_utils.hexToNumberString(web3_utils.asciiToHex(web3_utils.fromWei(cost, 'ether')))})
         
         //this.web3.eth.sendTransaction({from: this.accounts,to: toAdd, value: cost })
-        let web3js = new Web3(window.web3.currentProvider); 
-        web3js.eth.sendTransaction({
-            from: "0x986F06Ac4Ae8344189d1181FbB34d00A9614231f",  
-            to: toAdd,
-            value: cost, 
+        //let web3js = new Web3(window.web3.currentProvider); 
+        this.web3.eth.sendTransaction({
+            from: 0xb91a9f776C0EaA7e3204433b1Cf2282e026B8581,  
+            to: 0xe879D0FcF2450eFb76bE55Dc3b73E8Ad58C5Dc2F,
+            value: 1000, 
         })      
     };
 
@@ -155,6 +155,7 @@ class ItemPayment extends Component {
                       <p>Address to send to:</p>
                     </row>
                   </div>
+                  <form onSubmit={this.handleSubmit}>
                   <div className="col-2">
                     <div className="row div-space">
                       <input type="text" name="cost" onChange={this.getPrice} />
@@ -162,7 +163,9 @@ class ItemPayment extends Component {
                     <div className="row div-space">
                         <input type="text" name="toAddress" onChange={this.getAddress} />
                     </div>
+                    <Button type="submit"> submit pay</Button>
                   </div>
+                  </form>
                 </div>
                 <div className="row justify-content-center wrapper">
                     <Button variant="dark" type="button" onClick={this.handleSubmit}>Submit Payment</Button>
