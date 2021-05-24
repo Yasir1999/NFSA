@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './ItemManager.css'
 import ItemManagerContract from "../contracts/ItemManager.json";
 import ItemContract from "../contracts/Item.json";
+import PaymentSplitter from "../contracts/PaymentSplitter.json"
 import getWeb3 from "../getWeb3";
 import Web3 from "web3";
 import { Container, Button, Table } from 'react-bootstrap'
 import Image from '../contracts/Image.json';
-
 
 class ItemManager extends Component {
     state = { loaded: false, cost: 0, itemName: "test"  };
@@ -192,6 +192,12 @@ class ItemManager extends Component {
 
       // Get the contract instance.
       this.networkId = await this.web3.eth.net.getId();
+
+      this.PaymentSplitter = new this.web3.eth.Contract(
+        PaymentSplitter.abi,
+        PaymentSplitter.networks[this.networkId] && PaymentSplitter.networks[this.networkId].address,
+      );
+
       this.ItemManagerContract = new this.web3.eth.Contract(
         ItemManagerContract.abi,
         ItemManagerContract.networks[this.networkId] && ItemManagerContract.networks[this.networkId].address,
@@ -261,6 +267,12 @@ class ItemManager extends Component {
     let result = await this.state.itemManagerContract.methods.createItem(itemName, cost).send({from: this.accounts[0]});
     console.log(result);
     alert("Send "+cost+" Wei to "+result.events.SupplyChainStep.returnValues._itemAddress);
+    let outputres = await this.state.itemManagerContract.methods.getValueAtMapping(10).call().then((res) => {
+      let a = [];
+      a = res;
+      console.log(res);
+    })
+    console.log("testing mapping " + outputres);
     console.log(result.events.SupplyChainStep.returnValues._step);
     if (result.events.SupplyChainStep.returnValues._step !== 1){
       //this.setState({ itemArray: result })
@@ -484,9 +496,9 @@ class ItemManager extends Component {
               arrConAdd: [...prevState.arrCon[0].arrConAdd, c]
             }],
           }));
-          console.log("Name " + this.state.arrCon[0].arrConName);
+          /*console.log("Name " + this.state.arrCon[0].arrConName);
           console.log("Cost " + this.state.arrCon[0].arrConCost);
-          console.log("Address " + this.state.arrCon[0].arrConAdd);
+          console.log("Address " + this.state.arrCon[0].arrConAdd);*/
         })
         //console.log(this.state.itemManagerContract.methods.getImgHash(0).call());
     }

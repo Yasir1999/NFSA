@@ -10,7 +10,7 @@ contract ItemManager is Ownable {
     
     struct S_Item {
         Item _item;
-        address payable NFSA2;
+        //address payable NFSA2;
         string _identifier;
         uint _itemPrice;
         ItemManager.SupplyChainState _state;
@@ -20,7 +20,7 @@ contract ItemManager is Ownable {
     uint itemIndex;
     uint256 fee = 70;
 
-    address payable NFSA = 0x66489F88F94775bb1116D52A21B2E3d2905EbdAc;
+    //address payable NFSA = 0x66489F88F94775bb1116D52A21B2E3d2905EbdAc;
 
     event SupplyChainStep(uint _itemIndex, uint _step, address _itemAddress);
     

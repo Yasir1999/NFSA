@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './ItemManager.css'
 import ItemManagerContract from "../contracts/ItemManager.json";
+import PaymentSplitter from "../contracts/PaymentSplitter.json"
 import ItemContract from "../contracts/Item.json";
 import getWeb3 from "../getWeb3";
 import { Container, Button } from 'react-bootstrap'
@@ -30,7 +31,7 @@ class ItemPayment extends Component {
           const uaccount = this.accounts;
           this.setState({account: uaccount[0]})*/
           const accounts = await this.web3.eth.getAccounts()
-          this.setState({account: accounts[1]})
+          this.setState({account: accounts[0]})
           // Get the contract instance.
           this.networkId = await this.web3.eth.net.getId();
           this.ItemManagerContract = new this.web3.eth.Contract(
@@ -41,6 +42,11 @@ class ItemPayment extends Component {
           this.item = new this.web3.eth.Contract(
             ItemContract.abi,
             ItemContract.networks[this.networkId] && ItemContract.networks[this.networkId].address,
+          );
+
+          this.PaymentSplitter = new this.web3.eth.Contract(
+            PaymentSplitter.abi,
+            PaymentSplitter.networks[this.networkId] && PaymentSplitter.networks[this.networkId].address,
           );
     
           // Set web3, accounts, and contract to the state, and then proceed with an
@@ -88,10 +94,11 @@ class ItemPayment extends Component {
         //const Web3 = require("web3");
         //const Web3 = await getWeb3();
         //const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:" + 7545));
-        //const web3_utils = require('web3-utils');
+        const web3_utils = require('web3-utils');
         //const accounts = await web3.eth.getAccounts();
+        const nfsaAccount = 0x66489F88F94775bb1116D52A21B2E3d2905EbdAc;
 
-        const cost = this.state.cost;
+        const cost = web3_utils.fromWei(this.state.cost, 'ether');
         const toAdd = this.state.toAddress;
         const fromAdd = this.state.account[0];
         console.log("To address: " + toAdd, cost, this.ItemManagerContract);
@@ -104,11 +111,18 @@ class ItemPayment extends Component {
         
         //this.web3.eth.sendTransaction({from: this.accounts,to: toAdd, value: cost })
         //let web3js = new Web3(window.web3.currentProvider); 
-        this.web3.eth.sendTransaction({
+        this.PaymentSplitter.new([nfsaAccount, toAdd],[7,3] ,{from: fromAdd, value:cost, gas:300000}).call();
+        console.log(this.PaymentSplitter.new([nfsaAccount, toAdd],[3,7] ,{from: fromAdd, value:cost, gas:300000}).call() + " Payment Splitter");
+        this.PaymentSplitter.release(nfsaAccount).call();
+        console.log(this.PaymentSplitter.release(nfsaAccount).call() + " relase to NFSA");
+        this.PaymentSplitter.release(toAdd).call();
+        console.log(this.PaymentSplitter.release(toAdd).call() + " release to address");
+        
+        /*this.web3.eth.sendTransaction({
             from: 0xb91a9f776C0EaA7e3204433b1Cf2282e026B8581,  
             to: 0xe879D0FcF2450eFb76bE55Dc3b73E8Ad58C5Dc2F,
             value: 1000, 
-        })      
+        })    */  
     };
 
     getPrice = (event) => {
