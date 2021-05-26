@@ -192,7 +192,7 @@ getImage = (event) =>  {
   event.preventDefault()
   const indID = this.state.indexID
   const total = this.state.totalImgs
-  if (total <= 0){
+  if (indID < 0){
     console.log("error: " + total + " " + indID);
   }
   else if (indID > total) {

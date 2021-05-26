@@ -10,7 +10,6 @@ contract ItemManager is Ownable {
     
     struct S_Item {
         Item _item;
-        //address payable NFSA2;
         string _identifier;
         uint _itemPrice;
         ItemManager.SupplyChainState _state;
@@ -18,14 +17,14 @@ contract ItemManager is Ownable {
     
     mapping(uint => S_Item) public items;
     uint itemIndex;
-    uint256 fee = 70;
+    uint fee = 70;
 
     //address payable NFSA = 0x66489F88F94775bb1116D52A21B2E3d2905EbdAc;
 
     event SupplyChainStep(uint _itemIndex, uint _step, address _itemAddress);
     
     function createItem(string memory _identifier, uint _itemPrice) public onlyOwner {
-        uint256 _updatedPrice = (_itemPrice * fee / 100);
+        uint _updatedPrice = (_itemPrice * fee / 100);
         Item item = new Item(this, _updatedPrice, itemIndex);
         items[itemIndex]._item = item;
         //items[itemIndex].NFSA2 = NFSA;
