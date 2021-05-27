@@ -1,23 +1,45 @@
 import React from 'react';
-import {Navbar, Nav, Container} from 'react-bootstrap';
+import {Navbar, Nav, Container, NavItem} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navigation.css';
 import Search from './Search';
-import 'font-awesome/css/font-awesome.min.css';
+import { useAuth0 } from '@auth0/auth0-react';
+// import LogoutButton from './LogoutButton';
+// import LoginButton from './LoginButton';
+// import 'font-awesome/css/font-awesome.min.css';
+// import  Loading from "./loading"
+import AuthenticationButton from "./authentication-button";
 
-function Navigation() {
+const Navigation = () => {
+
+    const {
+        user,
+        isAuthenticated,
+        loginWithRedirect,
+        logout,
+      } = useAuth0();
+
+
+
     return (
+        
+
         <>
         {/* Setting the links to pages via Nav.Link items */}
         <Navbar className="colour-nav" expand="xl">
             <Navbar.Brand href="/"><img alt="" src="../../logo192.png" className="navbar-brand"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggle navbar-dark"/>
             {/* Added collapsable Navbar when window size gets smaller */}
-            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand">
-                <Nav className="adjust-height" id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand ">
+                <Nav className="adjust-height">
+
+
+                {/* {isAuthenticated && ( */}
+
                     <Nav.Item>
                         <Nav.Link href="/about">About</Nav.Link>
                     </Nav.Item>
+                    {/* )} */}
                     <Nav.Item>
                         <Nav.Link href="/accessrestrictions">Access Restrictions</Nav.Link>
                     </Nav.Item>
@@ -28,7 +50,14 @@ function Navigation() {
                         <Nav.Link href="/help">Help</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link href="/login">Login</Nav.Link>
+                    <Nav.Link href="/profile">Profile</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link>
+                        <div className="navbar-nav ml-auto">
+                            <AuthenticationButton />
+                         </div>
+                    </Nav.Link>
                     </Nav.Item>
                 </Nav>
             </Navbar.Collapse>
@@ -45,9 +74,13 @@ function Navigation() {
                     <span className="fa fa-search form-control-feedback"></span>
                     <input type="text" className="form-control" placeholder="Search"/> 
                 </div>
+
             </div>
             </Container>
         </div>
+
+
+
      {/*
         <Navbar className="justify-content-center nav-fill nav colour-nav">
             <Nav>
@@ -69,6 +102,7 @@ function Navigation() {
         </>
     );
 };
+
 
 
 export default Navigation;
