@@ -10,16 +10,23 @@
 
 .nav-item {
     height:50px;
-    margin-bottom: 10px;
+    margin-bottom: -40px;
     padding-bottom: -40px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 65px;
+    max-width: 80%;
 }
 
 .nav-item .nav-link {
     font-family: 'futuralightbt';
     font-size: 20px;
+<<<<<<< HEAD
     margin: 40px;
     margin-top: 65px;
     
+=======
+>>>>>>> Development
 }
 
 .navbar-toggle {
@@ -49,7 +56,6 @@
     width:500px;
     font-family: 'futuralightbt';
     max-width: 1200px;
-    
 }
 
 .form-group{
@@ -98,3 +104,4 @@
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
 }
+

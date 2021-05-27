@@ -39,6 +39,7 @@ import { Charges } from './components/Charges';
 import { AccessRestrictions } from './components/AccessRestrictions';
 import { Help } from './components/Help';
 import { NoMatch } from './components/NoMatch';
+<<<<<<< HEAD
 import styled from "styled-components";
 // import { AccountBox } from "./components/accountBox";
 import { LoginButton } from "./components/LoginButton";
@@ -68,6 +69,13 @@ const AppContainer = styled.div`
 //   loginWithRedirect,
 //   logout,
 // } = useAuth0();
+=======
+import { Login } from './components/Login';
+import ItemManager from './components/ItemManager';
+import ItemPayment from './components/ItemPayement';
+import IPFS from './components/UploadIPFS';
+
+>>>>>>> Development
 
 const ProtectedRoute = ({ component, ...args }) => (  
   <Route component={withAuthenticationRequired(component)} {...args} />
@@ -121,8 +129,14 @@ class App extends Component {
               <Route path="/logout" component={LogoutButton} />
               <ProtectedRoute path="/profile" component={Profile} />
               <Route path="/charges" component={Charges} />
+<<<<<<< HEAD
               <Route path="/card" component={Card} />
 
+=======
+              <Route path="/contracts" component={ItemManager} />
+              <Route path="/payment" component={ItemPayment} />
+              <Route path="/ipfs" component={IPFS} />
+>>>>>>> Development
               <Route component={NoMatch} />
             </Switch>
           </Router>

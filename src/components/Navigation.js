@@ -30,26 +30,32 @@ const Navigation = () => {
             <Navbar.Brand href="/"><img alt="" src="../../logo192.png" className="navbar-brand"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggle navbar-dark"/>
             {/* Added collapsable Navbar when window size gets smaller */}
+<<<<<<< HEAD
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand ">
                 <Nav className="adjust-height">
 
 
                 {/* {isAuthenticated && ( */}
 
+=======
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center nav-fill nav navbar-brand">
+                <Nav className="adjust-height" id="basic-navbar-nav">
+>>>>>>> Development
                     <Nav.Item>
-                    <Nav.Link href="/about">About</Nav.Link>
+                        <Nav.Link href="/about">About</Nav.Link>
                     </Nav.Item>
                     {/* )} */}
                     <Nav.Item>
-                    <Nav.Link href="/accessrestrictions">Access Restrictions</Nav.Link>
+                        <Nav.Link href="/accessrestrictions">Access Restrictions</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                    <Nav.Link href="/charges">Charges</Nav.Link>
+                        <Nav.Link href="/charges">Charges</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                    <Nav.Link href="/help">Help</Nav.Link>
+                        <Nav.Link href="/help">Help</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
+<<<<<<< HEAD
                     <Nav.Link href="/profile">Profile</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
@@ -58,13 +64,16 @@ const Navigation = () => {
                             <AuthenticationButton />
                          </div>
                     </Nav.Link>
+=======
+                        <Nav.Link href="/login">Login</Nav.Link>
+>>>>>>> Development
                     </Nav.Item>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
 
         <div class="input-group justify-content-center nav-fill nav colour-nav">
-            <Container className="container-height">
+            <Container className="container-height" >
             <div className="searchbar-align">
                 <div className="nfsa-search">
                     <Search />

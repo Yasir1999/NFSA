@@ -1,0 +1,46 @@
+{
+  "contracts": {},
+  "solidityLibs": {},
+  "proxies": {
+    "nfsa-site/ItemManager": [
+      {
+        "address": "0x4ed67a6DB7AD2a510C7dAf3B12F69c28062Ac20e",
+        "kind": "NonProxy",
+        "bytecodeHash": "135ef6f4c600e710bf23bdae3510ff6b7e5037ad085df242beca418c784f5f5f"
+      }
+    ],
+    "nfsa-site/Image": [
+      {
+        "address": "0x59d17e4c81776Dc56fFCbC45c80448F807E053C3",
+        "kind": "NonProxy",
+        "bytecodeHash": "b06a2f48b0fd03ef828ef1dc58682f0655c8adee71c37f358b5af2a0a6628942"
+      }
+    ],
+    "nfsa-site/Migrations": [
+      {
+        "address": "0xD080B7ab3CA735F6eecC9D819873a182e8ae7a4b",
+        "kind": "NonProxy",
+        "bytecodeHash": "db91b898eb9fa0b4eafd701213c7699631616fde917db985e82ed26df656c3f8"
+      },
+      {
+        "address": "0x842C24EEf45479d23d146c89bB836Cc2E6b84cCb",
+        "kind": "NonProxy",
+        "bytecodeHash": "db91b898eb9fa0b4eafd701213c7699631616fde917db985e82ed26df656c3f8"
+      }
+    ],
+    "nfsa-site/Counter": [
+      {
+        "address": "0x5D4bc3e1dB23d962d34B91894e184C0bA5cF7aB6",
+        "kind": "NonProxy",
+        "bytecodeHash": "b18397e75644648ec8e23e7532b90de1d69485e43de438ad20e5b725a5a174b8"
+      },
+      {
+        "address": "0x2fBe2f986e5b70cD9602C9c4291a4B68F6C9F4CC",
+        "kind": "NonProxy",
+        "bytecodeHash": "f68dee3f2fa1e24bfbc190d621f7620c89526298fa35b318a7cb32392359182f"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "0.1.0"
+}
