@@ -360,38 +360,43 @@ getArray = (event) => {
 
 
   render() {
-    const arrHash = [{
+    /*const arrHash = [{
       arrName: [],
       arrHVal: []
-    }];
+    }];*/
     return (
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
-                  <img src={`https://ipfs.infura.io/ipfs/${this.state.imgHash}`} className="img-resize" />
-                  <p>&nbsp;</p>
-                  <p>File Name: <span id='outputImgName'></span></p>
-                <p>&nbsp;</p>
-                <h2>Change image</h2>
+              <h2>Upload File to IPFS</h2>
+              <br></br>
+              <br></br>
                 <form onSubmit={this.onSubmit}>
                   <input type='file' onChange={this.captureFile}/>
-                  <input type='text' onChange={this.captureName}/>
+                  <span>File Name: <input type='text' onChange={this.captureName}/></span>
                   <input type='submit' id='btn'/>
                 </form>
                 <p>&nbsp;</p>
-                <p>Total number of files saved:</p><span id="outputTotal"></span>
-                <p>Image hash: <span id="outputImg">##########</span></p>
-                <p>Count: <span id="outputAmt"></span></p>
-                <Button onClick={this.getCount} variant='dark'>get count</Button>
+                <p>&nbsp;</p>
+                {/*<p>Total number of files saved:</p><span id="outputTotal"></span>*/}
+                <p>File Name: <span id="outputImgName">##########</span></p>
+                <p>File Hash: <span id="outputImg">##########</span></p>
+                <a href={this.state.linkArray}>File Link</a>
+                <br></br>
+
+                {/*<Button onClick={this.getCount} variant='dark'>get count</Button>*/}
                 <br></br>
                 <br></br>
                 <form onSubmit={this.getImage}>
+                  <p><strong>Get File By ID</strong></p>
                   <input type='text' onChange={this.captureID}/>
                   <input type='submit' id='btn'/>
                 </form>
+                <p>&nbsp;</p>
+                <p>Total File Count:     <span id="outputAmt"></span></p>
                 <br></br>
-                <Button onClick={this.getImgNameFromContract}>get name</Button>
+                {/*<Button onClick={this.getImgNameFromContract}>get name</Button>*/}
                 <br></br>
                 <br></br>
                 <div className="container">
@@ -427,11 +432,11 @@ getArray = (event) => {
                 
                 <br></br>
                 <br></br>
-                <Button onClick={()=> {
+                {/*<Button onClick={()=> {
 
                 }}>Test</Button>
                 <br></br>
-
+              */}
                 {/*
                 <table>
                   <tr>
