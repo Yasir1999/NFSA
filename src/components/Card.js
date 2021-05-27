@@ -40,7 +40,7 @@ function Card () {
             <p>{postDetail.size}</p>
             <p>{postDetail.colour}</p>
             <p>{postDetail.sound}</p>
-            <p>{postDetail.ipfs}</p>
+            {/* <p>{postDetail.ipfs}</p> */}
             </div>
             </Toggle>
           </div>
