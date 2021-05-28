@@ -50,6 +50,9 @@ import Auth0ProviderWithHistory from './auth0-provider-with-history';
 import PrivateRoute from "./components/private-route"
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import Card from "./components/Card"
+import ItemManager from './components/ItemManager';
+import ItemPayment from './components/ItemPayement';
+import Ipfs from './components/UploadIPFS';
 
 const AppContainer = styled.div`
   width: 200%;
@@ -122,6 +125,9 @@ class App extends Component {
               <ProtectedRoute path="/profile" component={Profile} />
               <Route path="/charges" component={Charges} />
               <Route path="/card" component={Card} />
+              <Route path="/contracts" component={ItemManager} />
+              <Route path="/payment" component={ItemPayment} />
+              <Route path="/ipfs" component={Ipfs} />
 
               <Route component={NoMatch} />
             </Switch>
