@@ -155,7 +155,7 @@ async componentWillMount() {
     this.state.contract.methods.numHashes().call().then((r) => {
       //let a = [];
       let res = this.setState({totalImgs: r});
-      document.getElementById('outputTotal').innerText = res;
+      //document.getElementById('outputTotal').innerText = res;
       console.log(res);
     })
     this.updateCount();
