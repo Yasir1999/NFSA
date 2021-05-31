@@ -1,7 +1,7 @@
 // import React from 'react';
 // import { useAuth0 } from "@auth0/auth0-react";
 // import JSONPretty from 'react-json-pretty';
-import { Container } from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap'
 
 
 
@@ -71,6 +71,9 @@ const Profile = () => {
         </pre>
 
       </div>
+    </div>
+    <div>
+      <Button href="/payment">Pay A Contract</Button>
     </div>
     </Container>
   );
