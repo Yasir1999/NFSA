@@ -124,7 +124,7 @@ class App extends Component {
               <Route path="/logout" component={LogoutButton} />
               <ProtectedRoute path="/profile" component={Profile} />
               <Route path="/charges" component={Charges} />
-              <Route path="/card" component={Card} />
+              <Route path="/items" component={Card} />
               <Route path="/contracts" component={ItemManager} />
               <Route path="/payment" component={ItemPayment} />
               <Route path="/ipfs" component={Ipfs} />

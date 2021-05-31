@@ -34,12 +34,12 @@ function Card () {
             <h4>{postDetail.itemNumber}</h4>
             <Toggle className="t" >
             <div className="p" >
-            <p>{postDetail.category}</p>
-            <p>{postDetail.format}</p>
-            <p>{postDetail.type}</p>
-            <p>{postDetail.size}</p>
-            <p>{postDetail.colour}</p>
-            <p>{postDetail.sound}</p>
+            <p>Category: {postDetail.category}</p>
+            <p>Format: {postDetail.format}</p>
+            <p>File Type: {postDetail.type}</p>
+            <p>File Size: {postDetail.size}</p>
+            <p>Colour: {postDetail.colour}</p>
+            <p>Sound: {postDetail.sound}</p>
             {/* <p>{postDetail.ipfs}</p> */}
             </div>
             </Toggle>
