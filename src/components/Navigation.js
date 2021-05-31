@@ -55,7 +55,7 @@ const Navigation = () => {
                     <Nav.Link href="/profile">Profile</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link href="/card">Media</Nav.Link>
+                        <Nav.Link href="/items">Items</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                     <Nav.Link>
