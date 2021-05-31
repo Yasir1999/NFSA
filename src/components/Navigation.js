@@ -46,11 +46,16 @@ const Navigation = () => {
                     <Nav.Item>
                         <Nav.Link href="/charges">Charges</Nav.Link>
                     </Nav.Item>
+                    {/*
                     <Nav.Item>
                         <Nav.Link href="/help">Help</Nav.Link>
                     </Nav.Item>
+                    */}
                     <Nav.Item>
                     <Nav.Link href="/profile">Profile</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href="/card">Media</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                     <Nav.Link>
