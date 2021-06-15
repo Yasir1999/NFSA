@@ -4,10 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navigation.css';
 import Search from './Search';
 import { useAuth0 } from '@auth0/auth0-react';
-// import LogoutButton from './LogoutButton';
-// import LoginButton from './LoginButton';
-// import 'font-awesome/css/font-awesome.min.css';
-// import  Loading from "./loading"
 import AuthenticationButton from "./authentication-button";
 
 const Navigation = () => {
@@ -19,11 +15,7 @@ const Navigation = () => {
         logout,
       } = useAuth0();
 
-
-
     return (
-        
-
         <>
         {/* Setting the links to pages via Nav.Link items */}
         <Navbar className="colour-nav" expand="xl">
@@ -35,7 +27,6 @@ const Navigation = () => {
 
 
                 {/* {isAuthenticated && ( */}
-
                     <Nav.Item>
                         <Nav.Link href="/about">About</Nav.Link>
                     </Nav.Item>
@@ -82,28 +73,7 @@ const Navigation = () => {
 
             </div>
             </Container>
-        </div>
-
-
-
-     {/*
-        <Navbar className="justify-content-center nav-fill nav colour-nav">
-            <Nav>
-                <Nav.Item>
-                    <Form>
-                        <Row>
-                            <Form.Label size="lg">
-                                <Search/>
-                            </Form.Label>
-                            <Form.Group controlId="searchBar">
-                                <Form.Control type="search" placeholder="Search"/>   
-                            </Form.Group>
-                        </Row>
-                    </Form>
-                </Nav.Item>
-            </Nav>
-     </Navbar>  */}
-        
+        </div>  
         </>
     );
 };

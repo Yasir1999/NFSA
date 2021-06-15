@@ -1,11 +1,9 @@
 import React from 'react'
 import './Home.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-/*import SearchReturn from './SearchReturn'*/
 import { Container } from 'react-bootstrap'
 
 export const Home = () => (
-        /*<SearchReturn/>*/
         <>
         <h1 className="headingtext">Welcome to the NFSA Collection</h1>
         <br></br>
