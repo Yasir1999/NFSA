@@ -1,7 +1,6 @@
 import React, { Component} from 'react';
 import Image from '../contracts/Image.json';
 import Web3 from "web3";
-import { Button, Card, CardGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import './UploadIPFS.css';
 
 const ipfsClient = require('ipfs-http-client')
@@ -13,31 +12,10 @@ class UploadIPFS extends Component {
 async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
-
-//    await this.getCount()
-    
-    /*let images = [];
-    const addImage = (ev)=> {
-
-    ev.preventDefault();
-    let image = {
-      id: Date.now,
-      hash: document.getElementById('outputItem').value
-    }
-    images.push(image);
-    let pre = document.querySelector('#msg pre');
-    pre.textContent = '\n' + JSON.stringify(images, '\t', 2);
-
-    localStorage.setItem('MyImageList', JSON.stringify(images));
-    } 
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-        document.getElementById('btn').addEventListener('click', addImage);
-    });*/
   }
 
+  // This function loads the IPFS data from the blockchain and sets the total amount into a state variable
   async loadBlockchainData() {
-    
     const web3 = window.web3
     const accounts = await web3.eth.getAccounts()
     this.setState({account: accounts[0]})
@@ -77,7 +55,6 @@ async componentWillMount() {
       imgName: [],
       arrText: []
     };
-    //this.handleChange = this.handleChange.bind(this)
   };
 
   async loadWeb3() {
@@ -91,6 +68,7 @@ async componentWillMount() {
     }
   }
 
+  // This function captures the file after the user has selected it from their desktop. It then reads the file and stores it as an array buffer
   captureFile = (event) => {
     event.preventDefault()
     const file = event.target.files[0]
@@ -102,6 +80,7 @@ async componentWillMount() {
     }
   }
 
+  // Function to retrieve the name of the file inputted by the user
   captureName = (event) => {
     event.preventDefault()
     const file = event.target.value;
@@ -109,6 +88,7 @@ async componentWillMount() {
     console.log(file);
   }
 
+  // Function to capture the ID inputted by the user for searching IPFS items
   captureID = (event) => {
     event.preventDefault()
     const file = event.target.value;
@@ -119,6 +99,7 @@ async componentWillMount() {
     }
   }
 
+  // Submits the file and the name and adds it to the IPFS service
   onSubmit = (event) => {
     event.preventDefault()
     console.log("Submitting the form...")
@@ -131,12 +112,7 @@ async componentWillMount() {
         console.error(error)
         return
       }
-      /*
-      this.state.contract.methods.setHash(imgHash).send({ from: this.state.account }).then((r) => {
-        this.setState({ imgHash: r })
-        this.setState({ arrHash: r })
-      })*/
-
+      // This stores the IPFS hash and name given into the smart contract making it immutable.
       this.state.contract.methods.setImgHash(imgHash, imgName).send({ from: this.state.account }).then((r) => {
         this.setState({ imgHash: imgHash })
         this.setState({ arrName: imgName })
@@ -148,29 +124,15 @@ async componentWillMount() {
         console.log("img name: " + this.state.imgName);
         console.log("img arr: " + this.state.arrText);
       })
-      //const res = imgHash
-      //document.getElementById('outputItem').innerText = res;
-      
     })
     this.state.contract.methods.numHashes().call().then((r) => {
-      //let a = [];
       let res = this.setState({totalImgs: r});
-      //document.getElementById('outputTotal').innerText = res;
       console.log(res);
     })
-    this.updateCount();
-    //this.loadArray();
-    
+    this.updateCount();    
 }
-/*
-getImages = (event) =>  {
-  event.preventDefault()
-  const indID = this.state.indexID
-  this.state.contract.methods.ImageHashes(indID).call().then((r) => {
-    document.getElementById('outputImg').innerText = r;
-  })
-}*/
 
+// Loads the array list of the items from the smart contract
 async loadArray() {
   const amt = this.state.totalImgs
     for (var i=0; i < amt; i++){
@@ -188,6 +150,7 @@ async loadArray() {
   }
 }
 
+// Retrieves the Image hash from IPFS by calling the smart contract by using the ID of the IPFS item
 getImage = (event) =>  {
   event.preventDefault()
   const indID = this.state.indexID
@@ -211,6 +174,7 @@ getImage = (event) =>  {
   }
 }
 
+// Updates the local count of the amount of files stored
 async updateCount(){
   const amt = this.state.totalImgs
   console.log(amt);
@@ -224,6 +188,7 @@ async updateCount(){
   }
 }
 
+// Button to manually get the count of items
 getCount = (event) => {
   event.preventDefault()
   const amt = this.state.totalImgs
@@ -239,21 +204,12 @@ getCount = (event) => {
 
 }
 
+// Retrieves and stores the IPFS hash and ID from the smart contract into States
 getArray = (event) => {
   event.preventDefault()
   const amt = this.state.totalImgs
-  //const imgs = this.state.imgHash
-  //console.log(amt + 1);
-  //console.log(this.state.contract.methods.getHash().call());
-  //var j;
-  //const output = []
-  //const output2 = []
-  //const output2 = this.state.imgHash
   for (var i=0; i < amt; i++){
     this.state.contract.methods.getImgHash(i).call().then((res) => {
-      
-      //output[i] = res[0];
-     // output2[i] = res[1];
      var a = res[0];
      var b = res[1];
       this.setState(prevState => ({
@@ -267,87 +223,22 @@ getArray = (event) => {
       console.log("Name " + this.state.arrHash[0].arrName);
     })
     console.log(this.state.contract.methods.getImgHash(0).call());
-
-
-    /*this.state.contract.methods.ImageHashes(i).call().then((res) => {
-      output[i] = res;
-      //console.log(output[i]);
-      //this.setState({ arrHash: output})
-      //console.log(i + " " + this.state.arrHash[i]);
-     // this.setState({ arrHVal: output })
-      //console.log(i + " arrHVal: " + this.state.arrHVal[i]);
-      //document.getElementById('outputList').innerText = output[i];
-      this.setState(prevState => ({
-        arrHash: [{
-          ...prevState.arrHash[0],
-          arrHVal: [...prevState.arrHash[0].arrHVal, output[i]]
-        }],
-      }));
-  })*//*
-  for (j=0; j < amt; j++){
-    this.state.contract.methods.ImageName(j).call().then((res2) => {
-    output2[j] = res2;
-    //output2[i].push(res2);
-    //this.setState({ arrText: output2 })
-    //console.log(i + " " + this.state.arrText[i]);
-    //this.setState({ arrName: output2 })
-    //console.log(i + " arrName: " + this.state.arrName[i]);
-   // console.log(output2[i], " result ");
-    //console.log(output2.length);
-    //console.log(output2[1]);
-    //console.log(this.state.arrName[1]);
-    this.setState(prevState => ({
-      arrHash: [{
-        ...prevState.arrHash[0],
-        arrName: [...prevState.arrHash[0].arrName, res2]
-      }],
-    }));
-  })
-}*/
-  /*
-  this.setState(prevState => ({
-    arrHash: [{
-      ...prevState.arrHash[0],
-      arrName: [...prevState.arrHash[0].arrName, "test"],
-      arrHVal: [...prevState.arrHash[0].arrHVal, "Test2"]
-    }],
-  }));*/
   }
 
   this.renderOutput();
 }
   
   renderOutput = () => {
-    /*return this.state.arrHash.map((index => {
-      return (
-            <tr>
-              <td key={index.arrName}>
-
-              </td>
-              <td key={index.arrHVal}>
-
-              </td>
-              
-            </tr>
-      )
-    }))*/
-    
+  
   }
-/*
-  renderOutput = () => {
-    return this.state.arrHash.map((arrHash, index) => (
-      <>
-        <td key={index}>{arrHash.itemName}</td>
-        <td key={index}>{arrHash.index}</td>
-      </>
-  ))
-  }*/
+
 
 
   handleChange(e) {
     console.log(e.target.value)
   }
 
+  // Retrieves name of Image from the smart contract
   getImgNameFromContract = (event) => {
     event.preventDefault()
     const getID = 0;
@@ -360,10 +251,6 @@ getArray = (event) => {
 
 
   render() {
-    /*const arrHash = [{
-      arrName: [],
-      arrHVal: []
-    }];*/
     return (
         <div className="container-fluid mt-5">
           <div className="row">
@@ -379,13 +266,10 @@ getArray = (event) => {
                 </form>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
-                {/*<p>Total number of files saved:</p><span id="outputTotal"></span>*/}
                 <p>File Name: <span id="outputImgName">##########</span></p>
                 <p>File Hash: <span id="outputImg">##########</span></p>
                 <a href={this.state.linkArray}>File Link</a>
                 <br></br>
-
-                {/*<Button onClick={this.getCount} variant='dark'>get count</Button>*/}
                 <br></br>
                 <br></br>
                 <form onSubmit={this.getImage}>
@@ -396,7 +280,6 @@ getArray = (event) => {
                 <p>&nbsp;</p>
                 <p>Total File Count:     <span id="outputAmt"></span></p>
                 <br></br>
-                {/*<Button onClick={this.getImgNameFromContract}>get name</Button>*/}
                 <br></br>
                 <br></br>
                 <div className="container">
@@ -416,80 +299,12 @@ getArray = (event) => {
                         ))
                         ))}
                   </table>
-                </div>
-
-                
-
-             {/*
-                    {this.state.arrHash.map(eachItem => (
-                      <div>
-                        name: {eachItem.arrName}
-                        <br />
-                        hash: {eachItem.arrHVal}
-                      </div>
-                    ))}
-                    */}
-                
+                </div>                
                 <br></br>
                 <br></br>
-                {/*<Button onClick={()=> {
-
-                }}>Test</Button>
-                <br></br>
-              */}
-                {/*
-                <table>
-                  <tr>
-                    <th>Index</th>
-                    <th>IPFS Hash Value</th>
-                    <th>Name</th>
-                  </tr>
-                  {this.state.arrHash.map((item =>
-                    <tr key={item.arrName}>{Object.values(item).map((val) => (
-                      {item.arrHVal}</tr>
-                    ))}
-                    </table> 
-              
-                <React.Fragment>
-                  {this.state.arrHash.map(eachItem => (
-                    <div>
-                      name: {eachItem.arrName}
-                      <br />
-                      hash: {eachItem.arrHVal}
-                    </div>
-                  ))
-                }
-                </React.Fragment>
-              */}{/*
-                <select onChange={this.handleChange}>
-                  {this.state.arrHash.map(item => {
-                    return (
-                      <option value={item.arrName}>{item.arrName}</option>
-                    )
-                  })}
-                </select>*/}
                 <br></br>
                 </div>
                 </main>
-                
-                <div className="container">
-                  {/*<CardGroup>
-                    {this.state.arrHash.map((item, index) => (
-                        this.state.arrHash[index].arrName.map((el,i) => (
-                          <Card key={index} style={{ width: '18rem'}}>
-                            <Card.Img variant="top" src={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`} className="img-resize"></Card.Img>
-                            <Card.Body>
-                              <Card.Title>Item Name: {el}</Card.Title>
-                              <Card.Text>
-                                IPFS Hash: {this.state.arrHash[index].arrHVal[i]} <br></br>
-                                <a href={`https://ipfs.infura.io/ipfs/${this.state.arrHash[index].arrHVal[i]}`}>Link To Item</a>
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                      ))
-                      ))}
-                        </CardGroup>*/}
-                </div>
           </div>
         </div>
     );
