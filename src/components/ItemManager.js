@@ -12,7 +12,6 @@ class ItemManager extends Component {
       super(props);
       this.state = {
         itemArray: [],
-        //itemName: [],
         itemAddress: [],
         itemCost: [],
         totalCount: null,
@@ -34,20 +33,16 @@ class ItemManager extends Component {
         sendCost: null
       }
     };
-/*
-    async componentWillMount() {
-      await this.componentDidMount()
-      await this.getItemsArray()
-      await this.getWaitingPaymentArray()
-    }
-*/
+    /* This component will mount when the page is loaded and try to instantiate the web3 api for the connection to the smart contracts */
     componentDidMount = async () => {
     try {
       this.web3 = await getWeb3();
 
+      /* This will grab the user account from MetaMask and store it locally */
       this.accounts = await this.web3.eth.getAccounts();
 
       this.networkId = await this.web3.eth.net.getId();
+      /* This will instantiate a new contract using the networkID and address */
       this.ItemManagerContract = new this.web3.eth.Contract(
         ItemManagerContract.abi,
         ItemManagerContract.networks[this.networkId] && ItemManagerContract.networks[this.networkId].address,
@@ -57,6 +52,7 @@ class ItemManager extends Component {
         ItemContract.abi,
         ItemContract.networks[this.networkId] && ItemContract.networks[this.networkId].address,
       );
+      /* These functions will update everytime the page is loaded */
       this.listenToPaymentEvent();
       this.setState({ loaded:true });
       await this.getWaitingPaymentArray()
@@ -69,16 +65,12 @@ class ItemManager extends Component {
     }
   };
 
-
+  /* This paymentEvent will wait and listen until the item in the contract has moved further on in the chain */
   listenToPaymentEvent = async() => {
     let self = this;
-    //this.ItemManagerContract.events.SupplyChainStep().on("data", async function(evt) {
     this.ItemManagerContract.events.SupplyChainStep().on("data", async function(evt) {      
       console.log(evt);
       let itemObj = await self.ItemManagerContract.methods.items(evt.returnValues._itemIndex).call();
-      //let itemObj3 = await self.ItemManagerContract.methods.items(evt.returnValues._itemAddress).call();
-      //let itemObj2 = await self.ItemManagerContract.methods.items(evt.returnValues._step).call();
-      //alert("Item " + itemObj._identifier + " was paid, deliver it now!");
       console.log(itemObj._step + evt.returnValues._step);
       console.log(self.ItemManagerContract.methods.items(evt.returnValues._step).call());
       if(evt.returnValues._step === "1"){
@@ -86,30 +78,11 @@ class ItemManager extends Component {
         document.getElementById('outputItem').innerText = "";
         document.getElementById('outputCost').innerText = "";
         document.getElementById('outputAddress').innerText = "";
-        //document.getElementById('outputIndex').innerText = "";
       }
     });
   }
-/*
-  listenToPaymentEventAfter = () => {
-    let self = this;
-    this.ItemManagerContract.events.SupplyChainStep().on("data", async function(evt) {      
-      console.log(evt);
-      let itemObj = await self.ItemManagerContract.methods.items(evt.returnValues._itemIndex).call();
-      //let itemObj3 = await self.ItemManagerContract.methods.items(evt.returnValues._itemAddress).call();
-      //let itemObj2 = await self.ItemManagerContract.methods.items(evt.returnValues._step).call();
-      //alert("Item " + itemObj._identifier + " was paid, deliver it now!");
-      console.log(itemObj._step + evt.returnValues._step);
-      console.log(self.ItemManagerContract.methods.items(evt.returnValues._step).call());
-      if(itemObj._state === "1"){
-        alert("Item " + itemObj._identifier + " was paid, deliver it now!");
-        document.getElementById('outputItem').innerText = "";
-        document.getElementById('outputCost').innerText = "";
-        document.getElementById('outputAddress').innerText = "";
-      }
-    });
-  }
-*/
+
+  /* Handles the input from the input boxes on the page */
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -119,6 +92,7 @@ class ItemManager extends Component {
     });
   }
 
+  /* This function will call the contracts methods and create those items within the blockchain */
   handleSubmit = async() => {
     const { cost, itemName } = this.state;
     console.log(itemName, cost, this.ItemManagerContract);
@@ -126,11 +100,11 @@ class ItemManager extends Component {
     console.log(result);
     alert("Send "+cost+" Wei to "+result.events.SupplyChainStep.returnValues._itemAddress);
     console.log(result.events.SupplyChainStep.returnValues._step);
+    /* This will set the states of the contracts parameters if the contract has successfully been created */
     if (result.events.SupplyChainStep.returnValues._step !== 1){
       let awaitCost = cost;
       let awaitAddress = result.events.SupplyChainStep.returnValues._itemAddress;
       let awaitItem = itemName;
-      //let awaitIndex = result.events.SupplyChainStep.returnValues._itemIndex;
       this.setState(prevState => ({
         arrCon: [{
           ...prevState.arrCon[0],
@@ -139,13 +113,14 @@ class ItemManager extends Component {
           arrConAdd: [...prevState.arrCon[0].arrConAdd, awaitAddress]
         }],
       }));
+      /* This will visually display that the item contract has been successfully created */
       document.getElementById('outputItem').innerText = awaitItem;
       document.getElementById('outputCost').innerText = awaitCost;
       document.getElementById('outputAddress').innerText = awaitAddress;
-      //document.getElementById('outputIndex').innerText = awaitIndex;
     } 
   };
 
+  /* This function is to be used in conjunction with the "Deliver Item" button allowing for further development */
   handleDelivery = async() => {
     let self = this;
     this.ItemManagerContract.events.SupplyChainStep().on("data", async function(evt) {
@@ -157,25 +132,10 @@ class ItemManager extends Component {
     }
   )};
 
-/*
-  handleIndex = async() => {
-    let self = this;
-    this.ItemManagerContract.events.SupplyChainStep().on("data", async function(evt) {
-      console.log(evt);
-      let getIndex = await self.ItemManagerContract.methods.items(evt.returnValues._itemIndex).call();
-      let awaitAddress = getIndex.events.SupplyChainStep.returnValues._itemAddress;
-      let awaitItem = getIndex.events.SupplyChainStep.returnValues._identifier;;
-      let awaitIndex = getIndex.events.SupplyChainStep.returnValues._itemIndex;
-      document.getElementById('outputItem').innerText = awaitItem;
-      document.getElementById('outputAddress').innerText = awaitAddress;
-      document.getElementById('outputIndex').innerText = awaitIndex;
-    }
-    )};*/
-
+  /* This will retrieve all the items in the smart contract by using a function created in the contract to display all the contracts by their ID */ 
     async getItemsArray() {
       this.ItemManagerContract.methods.getItems().call().then((total) => {
         this.setState({ totalCount: total})
-        //document.getElementById('outputAmt').innerText = total;
         console.log(total);
         console.log("State: " + this.state.totalCount);
         const amt = this.state.totalCount;
@@ -193,15 +153,12 @@ class ItemManager extends Component {
                 arrConAdd: [...prevState.arrCon[0].arrConAdd, c]
               }],
             }));
-            /*console.log("Name " + this.state.arrCon[0].arrConName);
-            console.log("Cost " + this.state.arrCon[0].arrConCost);
-            console.log("Address " + this.state.arrCon[0].arrConAdd);*/
           })
-          //console.log(this.state.itemManagerContract.methods.getImgHash(0).call());
       }
     })
   }
 
+  /* This function awaits the payment from the Customer and will notify the User with an alert box */
   getWaitingPaymentArray= async() =>  {
     let self = this;
     const amt = this.state.totalCount;
@@ -277,10 +234,7 @@ class ItemManager extends Component {
                   <br></br>
                   <Button variant="dark" type="button" onClick={this.handleDelivery}>Deliver Item</Button>
                 </div>
-                  {/*<Button variant="dark" type="button" onClick={this.getWaitingPaymentArray}>Array Test</Button>
-                  <Button variant="dark" type="button" onClick={this.handleIndex}>Get by Index</Button>*/}
                   <span id="deliverItem"/>
-                  {/*<p>Count: <span id="outputAmt"></span></p>*/}
               </div>
               <br></br>
               </div>

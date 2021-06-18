@@ -18,9 +18,3 @@ function Search({style}){
 
 
 export default Search;
-
-/*function Search({style}){
-    return <div style={style}>
-        <Select options={options} styles={customStyles} isMulti placeholder="Categories"  MenuHeight="50" />
-    </div>
-}}*/

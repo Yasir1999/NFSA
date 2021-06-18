@@ -1,43 +1,5 @@
-// import React from 'react';
-// import { useAuth0 } from "@auth0/auth0-react";
-// import JSONPretty from 'react-json-pretty';
 import { Container, Button } from 'react-bootstrap'
-
-
-
-
-// const Profile = () => {
-
-//   const { user, isAuthenticated, isLoading } = useAuth0();
-  
-//   // if (isLoading) {
-//   //   return <div>Loading ...</div>;
-//   // }
-
-//   return (
-    
-//     isAuthenticated && ( 
-//       <Container>
-//      <div>
-//        <h1 className="headingtext">Profile</h1>
-//        <br></br>
-//         <img src={user.picture} alt={user.name} />
-//         <h2>Hello, {user.name}</h2>
-//         <p>{user.email}</p>
-//         <p>{user.role}</p>
-//         <JSONPretty data={user} />
-//         {/* {JSON.stringify(user, null, 2)} */}
-//       </div>
-//       </Container>
-//     )
-//   )
-// }
-
-// export default Profile 
-
-
 import React from "react";
-
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
@@ -49,7 +11,7 @@ const Profile = () => {
   }
 
   return (
-          <Container>
+  <Container>
     <div>
       <div className="row align-items-center profile-header">
         <div className="col-md-2 mb-3">
@@ -62,7 +24,6 @@ const Profile = () => {
         <div className="col-md text-center text-md-left">
           <h2>{name}</h2>
           <p className="lead text-muted">{email}</p>
-          {/* <p>{user.name}</p> */}
         </div>
       </div>
       <div className="row">
@@ -78,7 +39,5 @@ const Profile = () => {
     </Container>
   );
 };
-
-// user.app_metadata.roles
 
 export default Profile;

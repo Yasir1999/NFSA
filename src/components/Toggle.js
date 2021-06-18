@@ -20,15 +20,7 @@ render(){
         {this.state.on && this.props.children}
         <button class="button" onClick={this.toggle}>{this.state.on ? "▲ Hide" : "▼Show" }</button>
         <br/>
-
-
-        
-
         </div>
-
-
         )
-
-    }     
-
+    }    
 }

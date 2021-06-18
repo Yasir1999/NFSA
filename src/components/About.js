@@ -8,6 +8,7 @@ export const About = () => (
         <h1 className="headingtext">About</h1>
         <br></br>
         <Container>
+            {/* Links to the content on the page */}
             <div className="bodytext">
                 <h4>Navigate</h4>
                 <li>
